@@ -1,152 +1,301 @@
 <template>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-  <div id="app">
-    <form>
-      <input v-model="title" placeholder="Title" required />
-      <textarea v-model="body" placeholder="Body" required />
-       <textarea v-model="password" placeholder="Body" required />
-      <button @click.prevent="sendPost()">Submit Post</button>
-    </form>
-  </div>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,700&family=Roboto:ital@1&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Roboto:ital@1&display=swap"
+    rel="stylesheet"
+  />
+ 
+    <head>
+      <title>Your Title here</title>
+      <link
+        rel="stylesheet"
+        href="https://bootswatch.com/4/lumen/bootstrap.min.css"
+      />
+    </head>
+    <header>
+      <h1>Groupomania</h1>
+      
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+      <nav>
+        <ul>
+          <li>
+            <a><router-link to="/">Accueil</router-link></a>
+          </li>
+          <li><router-link v-if="token" to="/posts">Forum</router-link></li>    
+          <li><router-link v-if="token == null" to="/singup">Inscription</router-link></li>
+          <li><router-link v-if="token == null" to="/login"> Connecter vous</router-link></li>
+           <li >
+            <router-link  v-if="token"    to="/selfSpace">
+              Espace Personel</router-link
+            >
+          </li>
+     
+        </ul>
+      </nav>
+      <label for="nav-toggle" class="nav-toggle-label">
+        <span></span>
+      </label>
+    </header>
+      <body>
+    <router-view />
+  </body>
 </template>
 
 <script>
-import axios from 'axios';
+
 export default {
- 
-   
-  data: function() {
+  
+  data: function () {
+
     return {
-      post: "",
-      title: "",
-      password:"",
-      body: "",
-      photos:[],
-       counter:JSON.parse(localStorage.getItem("token"))
-      
+      email: "",
+      password: "",
+      photos: [],
+      token: JSON.parse(localStorage.getItem("token")),
+        isUserConnected: false,
+            name: "App",
+  components: {},
+  test:false
     };
- 
+  },
+   mounted() {
+    this.updateData();
+  },
+  created(){
+this.testo
   },
   methods: {
-    
-    sendPost() {
+       testo() {
+      this.token = JSON.parse(localStorage.getItem("token"));
+    },
+    testo2() {
      
-      const postData = { username: this.title, email: this.body, password: this.password  };
-      axios
-   
-        .post("http://localhost:3000/api/user/login", postData,)
-           .then(res => {
-         
-           localStorage.setItem("token", JSON.stringify(res.data));
-          
-        });
+    },
+    updateData() {
+       setInterval(this.testo, 2500);
+    },
+  
+     close(message) {
+         console.log(message);
+    },
+    veremos(){
+      this.token = JSON.parse(localStorage.getItem("token"))
+    }
+  },
+}
 
-    
-    }
-        
-        },
-         
-         
-  
-    }
-  
-;
+ 
 </script>
-  
 
-
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-body{margin-top:20px;}
-
-/*==================================================
-  Post Contents CSS
-  ==================================================*/
-
-.post-content{
-  background: #f8f8f8;
-  border-radius: 4px;
-  width: 80%;
-  border: 1px solid #f1f2f2;
-  margin-bottom: 20px;
-  margin-left:10%;
-  overflow: hidden;
-  position: relative;
+<style>
+@import url("https://fonts.googleapis.com/css?family=Work+Sans:300,600");
+h1 header {
+  display: flex;
+  align-items: flex-end;
+  margin-left: -100px;
+  font-family: "Lato", bold;
 }
 
-.post-content img.post-image, video.post-video, .google-maps{
-  width: 100%;
-  height: auto;
+h1 {
+  color: #fd2d01;
+  font-family: "Lato", bold;
+}
+:root {
+  --background: rgba(0, 214, 170, 0.85);
 }
 
-.post-content .google-maps .map{
-  height: 300px;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
-
-.post-content .post-container{
-  padding: 20px;
-  padding-right:100px;
-}
-
-.post-content .post-container .post-detail{
-  margin-left: 65px;
-  position: relative;
-}
-
-.post-content .post-container .post-detail .post-text{
-  line-height: 24px;
+a body {
   margin: 0;
+  background: #222;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 400;
 }
 
-.post-content .post-container .post-detail .reaction{
+.content {
+  height: 200vh;
+  background-color: #333;
+  background-blend-mode: multiply;
+  background-size: cover;
+  display: grid;
+  place-items: center;
+}
+
+/* navigation styles start here */
+
+header {
+  background: white;
+  text-align: center;
+  position: relative;
+  top: 1px;
+  right: 1px;
+  z-index: 999;
+  width: 100%;
+}
+
+.nav-toggle {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+.nav-toggle:focus ~ .nav-toggle-label {
+  outline: 3px solid rgba(lightblue, 0.75);
+}
+
+.nav-toggle-label {
   position: absolute;
-  right: 0;
   top: 0;
+  left: 0;
+  margin-left: em;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  background-color: #fd2d01;
+  width: 44px;
+  margin-right: 15px;
+  padding-left: 7px;
 }
 
-.post-content .post-container .post-detail .post-comment{
-    margin: 10px auto;
-    margin-bottom: 20px;
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  display: block;
+  background: white;
+  height: 2px;
+  width: 2em;
+  border-radius: 2px;
+  position: relative;
 }
 
-.post-content .post-container .post-detail .post-comment img.profile-photo-sm{
-  margin-right: 10px;
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  content: "";
+  position: absolute;
 }
 
-.post-content .post-container .post-detail .post-comment .form-control{
-  height: 30px;
-  border: 1px solid #ccc;
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-  margin: 7px 0;
-  min-width: 0;
+.nav-toggle-label span::before {
+  bottom: 7px;
 }
 
-img.profile-photo-md {
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
+.nav-toggle-label span::after {
+  top: 7px;
 }
 
-img.profile-photo-sm {
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
+nav {
+  position: absolute;
+  text-align: left;
+  top: 100%;
+  left: 0;
+  background: white;
+  width: 100%;
+  transform: scale(1, 0);
+  transform-origin: top;
+  transition: transform 400ms ease-in-out;
 }
 
-.text-green {
-    color: #8dc63f;
+nav ul {
+  margin: 0;
+  padding: 0;
+   margin-top: 15px;
+  list-style: none;
 }
 
-.text-red {
-    color: #ef4136;
+nav li {
+  margin-bottom: 1em;
+  margin-left: 1em;
 }
 
-.following {
-    color: #8dc63f;
-    font-size: 12px;
-    margin-left: 20px;
+nav a {
+  color: #fd2d01;
+  text-decoration: none;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  opacity: 0;
+  font-family: "Lato", regular;
+  transition: opacity 150ms ease-in-out;
 }
 
+nav a:hover {
+  color: blue;
+}
 
+.nav-toggle:checked ~ nav {
+  transform: scale(1, 1);
+}
+
+.nav-toggle:checked ~ nav a {
+  opacity: 1;
+  transition: opacity 250ms ease-in-out 250ms;
+}
+
+@media screen and (min-width: 800px) {
+  .nav-toggle-label {
+    display: none;
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+  }
+
+  .logo {
+    grid-column: 2 / 3;
+  }
+
+  nav {
+    /* the following lines are not from my video, but add Edge support */
+    position: relative;
+    text-align: left;
+    transition: none;
+    transform: scale(1, 1);
+    background: none;
+    top: initial;
+    left: initial;
+    /* end Edge support stuff */
+    grid-column: 3 / 4;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  nav ul {
+    display: flex;
+   
+  }
+
+  nav li {
+    margin-left: 3em;
+    margin-bottom: 0;
+  }
+
+  nav a {
+    opacity: 1;
+    position: relative;
+  }
+
+  nav a::before {
+    content: "";
+    display: block;
+    height: 5px;
+    background: #ace8fb;
+    position: absolute;
+    top: -0.75em;
+    left: 0;
+    right: 0;
+    transform: scale(0, 1);
+    transition: transform ease-in-out 250ms;
+  }
+
+  nav a:hover::before {
+    transform: scale(1, 1);
+  }
+}
 </style>

@@ -15,41 +15,29 @@
         href="https://bootswatch.com/4/lumen/bootstrap.min.css"
       />
     </head>
-    <header>
-      <h1>Groupomania</h1>
-      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
-      <nav>
-        <ul>
-          <li>
-            <a><router-link to="/">Accueil</router-link></a>
-          </li>
-          <li><router-link to="/singup">Inscription</router-link></li>
-          <li><router-link to="/login"> Connecter vous</router-link></li>
-          <li >
-            <router-link v-if="token"   to="/selfSpace">
-              Espace Personel</router-link
-            >
-          </li>
-        </ul>
-      </nav>
-      <label for="nav-toggle" class="nav-toggle-label">
-        <span></span>
-      </label>
-    </header>
+   
+    
+       <HelloWorld> </HelloWorld>
+     
   </div>
+ 
 
-  <body>
-    <router-view />
-  </body>
 </template>
 
-<script>export default {
+<script>
+import HelloWorld from "../components/HelloWorld.vue";
+export default {
+   components: {
+ HelloWorld
+  },
   data: function () {
+
     return {
       email: "",
       password: "",
       photos: [],
       token: JSON.parse(localStorage.getItem("token")),
+        isUserConnected: false,
             name: "App",
   components: {},
   test:false
@@ -59,7 +47,7 @@
      updateData() {
       setInterval(this.created, 2500);
     },
-    created(){
+    veremos(){
       this.token = JSON.parse(localStorage.getItem("token"))
     }
   },
@@ -182,6 +170,7 @@ nav {
 nav ul {
   margin: 0;
   padding: 0;
+   margin-top: 15px;
   list-style: none;
 }
 
@@ -245,6 +234,7 @@ nav a:hover {
 
   nav ul {
     display: flex;
+   
   }
 
   nav li {

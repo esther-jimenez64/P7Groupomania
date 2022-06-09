@@ -21,12 +21,12 @@
     <div class="widget-post__actions post--actions">
       <div class="post-actions__attachments">
         <button type="button" class="btn post-actions__upload attachments--btn">
-          <label for="upload-image" class="post-actions__label">
+          <label for="modify" class="post-actions__label">
              <i class="fa fa-upload" aria-hidden="true"></i> 
             upload image
           </label>
         </button>
-        <input type="file" id="upload-image"  accept="image/png, image/jpeg, image/jpg"
+        <input type="file" id="modify"  accept="image/png, image/jpeg, image/jpg"
         @change="OneFileSelected"
         />
      
@@ -285,7 +285,8 @@ ul {
 :-moz-placeholder {
   color: #666;
 }
-.btn-Modify:hover{
+.btn-
+fy:hover{
    color: black;
 }
 </style>

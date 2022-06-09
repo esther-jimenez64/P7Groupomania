@@ -1,14 +1,17 @@
 <template>
   <div>
-    <form >
+    <form   >
                   <input
+                  :id="`input-modif${commentt.id}`"
                   class="test"
                     type="text"
                     placeholder="content"
                     v-model="content"
                     required
+                     role="form"
+                     onfocus= functionname
                   />
-                <button  @click.prevent="guardar()" type="button" class="btn btn-Modify" data-v-5cc6dbb6="" data-v-7a034ad9=""><i class="fa-solid fa-paper-plane-top"></i> Send </button>
+                <button @click.prevent="guardar(commentt.id)"  type="button" class="btn btn-SendModify" data-v-5cc6dbb6="" data-v-7a034ad9=""><i class="fa-solid fa-paper-plane-top"></i> Send </button>
                 <font-awesome-icon icon="fa-solid fa-paper-plane-top" />
                 </form>
   </div>
@@ -30,35 +33,76 @@ export default {
       selectedFile: null,
     };
   },
+ mounted() {
+    this.updateData();
+  },  
   methods: {
-    guardar() {
-        console.log(this.commentt);
-        console.log(this.counter.userId);
+       updateData() {
+      setInterval(this.created, 2500);
+    },
+    created() {
+      const headers = {
+        authorization: "Bearer " + this.token.token,
+      };
+      axios
+
+        .get("http://localhost:3000/api/publication/post", { headers })
+
+        .then((response) => (this.publications = response.data));
+    },
+    guardar(ide) {  
+
+   const jop =  document.getElementById(`input-modif${ide}`);
+if(document.getElementById(`input-modif${ide}`) === document.activeElement){
+  jop.style.color = 'black';
+}
+       
+            
+
+     
+      
      const formData = {
         content: this.content,
         userId: this.counter.userId,
+          username: this.counter.user,
       };
       const id = this.counter.userId;
       const PostId = this.publicationn.id;
       const CommentId = this.commentt.id;
-      console.log(id);
+            
+     
       axios
         .put(`http://localhost:3000/api/comment/${id}/${PostId}/${CommentId}`, formData, {
           headers: {
             Authorization: "Bearer " + this.counter.token,
           },
         })
+    
         .then((response) => {
-          console.log(response.data);
+              console.log(response.data);  
+
+ 
+              jop.style.color = 'white';
+               
+        
+          
+        
         });
+     
+    
+        
+    
+  
     },
+     
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-   button.btn.btn-Modify[data-v-7a034ad9][data-v-a679a10e] {
+
+   button.btn.btn-SendModify[data-v-7a034ad9][data-v-a679a10e] {
     color: #fff;
     background-color: #ff4136;
     border-color: #ff4136;

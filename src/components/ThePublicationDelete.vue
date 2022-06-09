@@ -1,7 +1,7 @@
 <template>
 
    
-    <button @click.prevent="guardar()" type="button" class="btn btn-danger">
+    <button @click.prevent="guardar()" type="button" class="btn btn-delete">
   <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
 </button>
 </template>
@@ -45,5 +45,19 @@ export default {
 <style scoped>
 .text-center{
   margin-top: 140px;
+}
+
+button.btn-delete:hover {
+   color: #fff;
+  background-color: #ff4136;
+  border-color: #ff4136;
+  cursor: pointer;
+}
+.btn-delete {
+   color: #fff;
+  background-color: #ff4136;
+  border-color: #ff4136;
+  position: relative;
+  left: 250px;
 }
 </style>

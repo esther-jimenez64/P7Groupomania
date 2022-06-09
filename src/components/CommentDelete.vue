@@ -4,7 +4,7 @@
   <div>
     <button                       @click.prevent="guardar()"
                                   type="button"
-                                  class="btn btn-dangerr"
+                                  class="btn btn-deleteComment"
                                   data-v-5cc6dbb6=""
                                   data-v-7a034ad9=""
                                 >
@@ -56,7 +56,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-button.btn.btn-dangerr {
+button.btn.btn-deleteComment{
   color: #fff;
   background-color: #ff4136;
   border-color: #ff4136;
@@ -65,7 +65,7 @@ button.btn.btn-dangerr {
     bottom: 35px;
     height: 36px;
 }
-button.btn.btn-dangerr:hover {
+button.btn.btn-deleteComment:hover {
   background-color: #ff4136;
   color: black;
   cursor: pointer;

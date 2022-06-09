@@ -35,12 +35,12 @@
                     />
                   </a>
                   <ThePublicationDelete :publicationn="publication" />
-                  <span class="userName">{{ this.counter.username }}</span>
+                  <span class="userName">{{ this.token.username }}</span>
                   <button
                     v-if="commentair"
                     @click="this.showoff()"
                     type="button"
-                    class="btn btn-dange"
+                    class="btn btn-modifyPost"
                     data-v-5ce821ab=""
                   >
                     <label class="post-actionsModify" data-v-5ce821ab=""
@@ -53,27 +53,22 @@
                     </label>
                   </button>
 
-                  <button
-                    v-else
-                    @click="this.show()"
-                    type="button"
-                    class="btn btn-dange"
-                    data-v-5ce821ab=""
-                  >
-                    <label class="post-actionsModify" data-v-5ce821ab=""
-                      ><i
-                        class="fa fa-pencil-square-o"
-                        aria-hidden="true"
-                        data-v-5ce821ab=""
-                      ></i>
-                      Modify
-                    </label>
-                  </button>
+            <button
+  v-else
+  @click="this.show(publication.id)"
+  type="button"
+    class="btn btn-modifyPost"
+    data-v-5ce821ab="">
 
-                  <ThePublicationModify
-                    v-if="commentair"
-                    :publicationn="publication"
-                  />
+<label class="post-actionsModify" data-v-5ce821ab="">
+  <i class="fa fa-pencil-square-o" aria-hidden="true" data-v-5ce821ab=""></i>
+   Modify
+</label>
+</button>
+
+<ThePublicationModify
+  v-if="commentair && editPostId == publication.id"
+  :publicationn="publication" />
 
                   <div class="blog-card-image">
                     <a href="#">
@@ -87,46 +82,33 @@
                     /></a>
                     <div class="ripple-cont"></div>
                   </div>
+                
+                  <div class="datePost">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M96 32C96 14.33 110.3 0 128 0C145.7 0 160 14.33 160 32V64H288V32C288 14.33 302.3 0 320 0C337.7 0 352 14.33 352 32V64H400C426.5 64 448 85.49 448 112V160H0V112C0 85.49 21.49 64 48 64H96V32zM448 464C448 490.5 426.5 512 400 512H48C21.49 512 0 490.5 0 464V192H448V464z"/></svg>
+                       {{this.convertDate(publication.updatedAt)}}
+                   </div>
+                
 
-                  <div class="blog-table">
-                    <button
-                      v-if="test"
-                      @click="this.showff2(publication.id)"
-                      type="button"
-                      class="btn btn-d"
-                      data-v-5ce821ab=""
-                    >
-                      <label class="post-actionsModify" data-v-5ce821ab="">
-                        <i
-                          class="fa fa-comments"
-                          aria-hidden="true"
-                          data-v-5ce821ab=""
-                        ></i>
-                        Afficher
-                      </label>
-                    </button>
-                    <button
-                      v-else
-                      @click="this.showff(publication.id)"
-                      type="button"
-                      class="btn btn-d"
-                      data-v-5ce821ab=""
-                    >
-                      <label class="post-actionsModify" data-v-5ce821ab="">
-                        <i
-                          class="fa fa-comments"
-                          aria-hidden="true"
-                          data-v-5ce821ab=""
-                        ></i>
-                        Afficher
-                      </label>
-                    </button>
-                    <div
-                      v-for="commentaire in publication.Comments"
-                      :key="commentaire.id"
-                      class="post-comment"
-                    >
-                      <div v-if="test">
+              
+                              
+                 <div class="blog-table">
+  <button
+    v-if="publication.Comments.length > 0"
+    @click="this.showAllComments(publication.id)"
+    type="button"
+    class="btn btn-d"
+    data-v-5ce821ab="">
+  <label class="post-actionsModify" data-v-5ce821ab="">
+    <i class="fa fa-comments" aria-hidden="true" data-v-5ce821ab="" ></i>
+    Afficher
+  </label>
+  </button>
+  <div
+    v-for="commentaire in publication.Comments"
+    :key="commentaire.id"
+    class="post-comment">
+  <div v-if="test && commentPostId == publication.id">
+          
                         <div class="card mb-2">
                           <div class="card-body p-2 p-sm-3">
                             <div class="media forum-item">
@@ -147,17 +129,21 @@
                                     data-toggle="collapse"
                                     data-target=".forum-content"
                                     class="text-body"
-                                    >{{ this.counter.username }}</a
+                                    >{{ this.token.username }}</a
                                   >
                                 </h6>
                                 <p class="text-secondary">
                                   {{ commentaire.content }}
                                 </p>
+                                  <div class="dateComment">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M96 32C96 14.33 110.3 0 128 0C145.7 0 160 14.33 160 32V64H288V32C288 14.33 302.3 0 320 0C337.7 0 352 14.33 352 32V64H400C426.5 64 448 85.49 448 112V160H0V112C0 85.49 21.49 64 48 64H96V32zM448 464C448 490.5 426.5 512 400 512H48C21.49 512 0 490.5 0 464V192H448V464z"/></svg>
+                        {{this.convertDate(commentaire.updatedAt)}}
+                   </div>
                                 <button
                                   v-if="coment"
                                   @click="this.offComment()"
                                   type="button"
-                                  class="btn btn-dangee"
+                                  class="btn btn-modifyComment"
                                   data-v-5ce821ab=""
                                 >
                                   <label
@@ -176,7 +162,7 @@
                                   v-else
                                   @click="this.showComment()"
                                   type="button"
-                                  class="btn btn-dangee"
+                                  class="btn btn-modifyComment"
                                   data-v-5ce821ab=""
                                 >
                                   <label
@@ -212,12 +198,9 @@
                               <div
                                 class="text-muted small text-center align-self-center"
                               >
-                                <span class="d-none d-sm-inline-block"
-                                  ><i class="far fa-eye"></i> {{ publication.updatedAt }}</span
-                                >
-                                <span
-                                  ><i class="far fa-comment ml-2"></i> 1</span
-                                >
+                            
+                                
+                               
                               </div>
                             </div>
                           </div>
@@ -240,9 +223,9 @@
                             alt="..."
                             class="avatar img-raised"
                           />
-                          <span>{{ this.counter.username }}</span>
+                          <span>{{ this.token.username }}</span>
                           <div class="detailBox">
-                            <form
+                               <form
                               @submit.prevent="save(publication.id)"
                               class="form-inline"
                               role="form"
@@ -297,12 +280,14 @@ export default {
   data: function () {
     return {
       album: 1,
-      counter: JSON.parse(localStorage.getItem("token")),
+      token: JSON.parse(localStorage.getItem("token")),
       publications: [],
       commentair: false,
       test: false,
       coment: false,
       comentDelete: false,
+      editPostId: null,
+      commentPostId: null
     };
   },
 
@@ -317,6 +302,28 @@ export default {
   },
 
   methods: {
+    showAllComments(postId) {
+  if (!this.test) {
+    this.test = true;
+    this.commentPostId = postId;
+  } else {
+    this.test = false;
+    this.commentPostId = null;
+  }
+},
+    show(postId) {
+  this.commentair = true;
+  this.editPostId = postId;
+},
+showoff() {
+  this.commentair = false;
+  this.editPostId = null;
+},
+      convertDate(updatedAt){
+        let substring = updatedAt.substring(0,10);
+         let substringo = updatedAt.substring(11,19);
+            return substring +"-" + substringo ;
+        },
     showCommentDelete() {
       this.comentDelete = true;
     },
@@ -329,24 +336,20 @@ export default {
     offComment() {
       this.coment = false;
     },
-    show() {
-      this.commentair = true;
-    },
+   
     showff() {
       this.test = true;
     },
     showff2() {
       this.test = false;
     },
-    showoff() {
-      this.commentair = false;
-    },
+  
     updateData() {
       setInterval(this.created, 2500);
     },
     created() {
       const headers = {
-        authorization: "Bearer " + this.counter.token,
+        authorization: "Bearer " + this.token.token,
       };
       axios
 
@@ -355,31 +358,29 @@ export default {
         .then((response) => (this.publications = response.data));
     },
 
-    save(id) {
+          save(id) {
       console.log(id);
       this.test =true
       const value = document.getElementById(`input-comment-${id}`).value;
       const formData = {
         content: value,
-        userId: this.counter.userId,
         postId: this.id,
-        username:this.counter.user
+        username:this.token.user
       };
       const PostId = id;
       console.log(value);
       axios
-
         .post(`http://localhost:3000/api/comment/${PostId}`, formData, {
           headers: {
-            Authorization: "Bearer " + this.counter.token,
+            Authorization: "Bearer " + this.token.token,
           },
         })
-
         .then((response) => console.log(response));
-      this.value = null;
+     document.getElementById(`input-comment-${id}`).value="";
       this.updateData();
     },
   },
+
 
   test(value) {
     console.log(value);
@@ -389,9 +390,29 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 /*==================================================
   Post Contents CSS
   ==================================================*/
+  .datePost {
+    position: relative;
+    left: 15px;
+    top: 5px;
+}
+ .datePost svg {
+    width:11px;
+    position: relative;
+    bottom: 1.5px;
+}
+ .dateComment svg {
+    width:11px;
+    position: relative;
+    bottom: 1.5px;
+}
+.dateComment {
+    position: relative;
+    left: 240px;
+}
 * p {
   width: 300px;
 }
@@ -690,14 +711,18 @@ p {
   align-content: flex-start;
   justify-content: flex-start;
 }
-button.btn.btn-dange {
+button.btn.btn-modifyPost{
   background-color: #4e5166b3;
   color: white;
   position: relative;
   left: 250px;
   height: 35px;
 }
-button.btn.btn-dange:hover {
+button.btn-btn-time{
+  background-color: #4e5166b3;
+  color: white;
+}
+button.btn.btn-modifyPost:hover {
   background-color: #4e5166;
   color: black;
   cursor: pointer;
@@ -721,13 +746,13 @@ button.btn.btn-d:hover {
   left: 250px;
 }
 
-button.btn.btn-dangee {
+button.btn.btn-modifyComment{
   background-color: #4e5166b3;
   color: white;
   position: relative;
 }
 
-button.btn.btn-dangee:hover {
+button.btn.btn-modifyComment:hover {
   background-color: #4e5166b3;
   color: black;
   position: relative;

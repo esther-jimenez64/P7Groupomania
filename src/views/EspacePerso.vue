@@ -54,28 +54,32 @@ export default {
       email: "",
       password: "",
       username: "",
-      counter: JSON.parse(localStorage.getItem("token")),
+      token: JSON.parse(localStorage.getItem("token")),
       photos: [],
     };
   },
   mounted() {
     this.created();
+        this.updateData();
   },
+   
   methods: {
+    updateData() {
+      setInterval(this.created, 2500);
+    },
     deconnecter() {
-      localStorage.removeItem("token");
+     this.token= localStorage.removeItem("token");
      
-      this.$router.push("/login");
        this.$router.push("/login");
      
       
     },
     created() {
-      const id = this.counter.userId;
+      const id = this.token.userId;
       axios
         .get(`http://localhost:3000/api/user/${id}`, {
           headers: {
-            Authorization: "Bearer " + this.counter.token,
+            Authorization: "Bearer " + this.token.token,
           },
         })
         .then((response) => (this.photos = response.data));

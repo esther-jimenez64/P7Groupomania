@@ -62,6 +62,8 @@
 <script>
 import axios from "axios";
 export default {
+
+   emit: ["closeModal"],
   data: function () {
     return {
       email: "",
@@ -71,6 +73,7 @@ export default {
     };
   },
   methods: {
+  
     goToPost() {
       this.$router.push("/posts");
     },
@@ -88,6 +91,8 @@ export default {
         .post("http://localhost:3000/api/user/login", postData)
         .then((res) => {
           localStorage.setItem("token", JSON.stringify(res.data));
+          this.token = JSON.parse(localStorage.getItem("token"))
+            this.$emit('closeModal',this.token);
           this.goToPost();
         });
     },
