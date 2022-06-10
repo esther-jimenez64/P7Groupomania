@@ -30,7 +30,8 @@
                 required
                 autofocus
               />
-              <br />
+             
+              <br/>
               <input
                 class="form-control"
                 v-model="password"
@@ -39,6 +40,7 @@
                 minlength="8"
                 required
               />
+              
 
               <input
                 v-model="username"
@@ -55,8 +57,8 @@
                  <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
                 Sign in
               </button>
-              <router-link class="pull-right need-help" to="/login"
-                >Déja Inscrit ? connecter vous</router-link
+              <router-link  class="pull-right need-help" to="/login"
+                >Déjà Inscrit ? Connecter vous</router-link
               >
               <router-view />
               >
@@ -77,19 +79,42 @@ export default {
       email: "",
       password: "",
       show: false,
+      chest:false
     };
   },
   methods: {
     sendPost() {
-      const postData = {
+        if (this.email.length < 5) { //Condition si le mot de pass est trop court non//
+      alert('Votre email doit contenir au moins 5 caractères');
+  }
+     if (this.username.length < 2) { //Condition si le mot de pass est trop court non//
+      alert('Votre username doit contenir au moins 5 caractères');
+  }
+        if (this.password.length < 5) { //Condition si le mot de pass est trop court non//
+      alert('Votre Mot de pass doit contenir au moins 5 caractères');
+  }
+  if (this.password.length > 50) { //S'il est trop long non//
+      alert('Votre Mots de pass ne peux  contenir plus de 50 caractères');
+  }
+    const regexEmail = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/
+  if (!regexEmail.test(this.email)) { //Si la regex n'est pas respecté alors non//
+     alert('Vous devait rentrer une Adresse Email valide');
+  }
+  const regexPassword = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]))/; //Regex pour valider le formulaire doit contenir 1 majuscule ////1 caractère spécial et un chiffre//
+  if (!regexPassword.test(this.password)&& this.password.length > 5) { //Si la regex n'est pas respecté alors non//
+    alert('Votre Mots de pass dois contenir au moins 1 caractère spéciaux une majuscule et un chiffre');
+    
+  }
+  const postData = {
         username: this.username,
         email: this.email,
         password: this.password,
       };
       axios.post("http://localhost:3000/api/user/signup", postData).then(() => {
-        alert("compte créer confirmer vos infos");
+      
         this.$router.push("/login");
       });
+     
     },
   },
 };

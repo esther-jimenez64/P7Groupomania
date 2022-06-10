@@ -39,9 +39,6 @@
         <span></span>
       </label>
     </header>
-      <body>
-    <router-view />
-  </body>
 </template>
 
 <script>
@@ -55,15 +52,11 @@ export default {
       password: "",
       photos: [],
       token: JSON.parse(localStorage.getItem("token")),
-        isUserConnected: false,
-            name: "App",
   components: {},
   test:false
     };
   },
-   mounted() {
-    this.updateData();
-  },
+ 
   created(){
 this.testo
   },
@@ -71,19 +64,6 @@ this.testo
        testo() {
       this.token = JSON.parse(localStorage.getItem("token"));
     },
-    testo2() {
-     
-    },
-    updateData() {
-       setInterval(this.testo, 2500);
-    },
-  
-     close(message) {
-         console.log(message);
-    },
-    veremos(){
-      this.token = JSON.parse(localStorage.getItem("token"))
-    }
   },
 }
 

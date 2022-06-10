@@ -18,7 +18,7 @@
    
     
        <HelloWorld> </HelloWorld>
-     
+       <router-view />
   </div>
  
 
@@ -37,8 +37,6 @@ export default {
       password: "",
       photos: [],
       token: JSON.parse(localStorage.getItem("token")),
-        isUserConnected: false,
-            name: "App",
   components: {},
   test:false
     };

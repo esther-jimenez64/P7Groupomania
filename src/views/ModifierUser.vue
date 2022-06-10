@@ -78,9 +78,23 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
+        
           this.$router.push("/selfSpace");
         });
     },
+      created() {
+      const id = this.token.userId;
+      axios
+        .get(`http://localhost:3000/api/user/${id}`, {
+          headers: {
+            Authorization: "Bearer " + this.token.token,
+          },
+        })
+        .then((response) => (this.photos = response.data));
+    },
+    newStorage(){
+     
+    }
   },
 };
 </script>

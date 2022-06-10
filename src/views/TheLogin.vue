@@ -49,7 +49,7 @@
                 Login
               </button>
               <router-link class="pull-right need-help" to="/singup">
-                Pas de compte ? insriver vous</router-link
+                Pas de compte ? Inscrivez vous</router-link
               ><router-view />
             </form>
           </div>
@@ -62,8 +62,7 @@
 <script>
 import axios from "axios";
 export default {
-
-   emit: ["closeModal"],
+  emit: ["closeModal"],
   data: function () {
     return {
       email: "",
@@ -73,13 +72,12 @@ export default {
     };
   },
   methods: {
-  
     goToPost() {
       this.$router.push("/posts");
     },
-     mounted(){
-        this.token = JSON.parse(localStorage.getItem("token"))
-     },
+    mounted() {
+      this.token = JSON.parse(localStorage.getItem("token"));
+    },
     sendPost() {
       const postData = {
         email: this.email,
@@ -91,21 +89,22 @@ export default {
         .post("http://localhost:3000/api/user/login", postData)
         .then((res) => {
           localStorage.setItem("token", JSON.stringify(res.data));
-          this.token = JSON.parse(localStorage.getItem("token"))
-            this.$emit('closeModal',this.token);
+          this.token = JSON.parse(localStorage.getItem("token"));
+          this.$emit("closeModal", this.token);
           this.goToPost();
+        })
+        .catch((res) => {
+          /*erreur possible et alert*/
+          console.log(res);
+          alert("L'émail saisi ou le mot de pass est incorrect ");
         });
     },
-       },
-  
-  
-  
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 #test a[data-v-092dea1e] {
   font-weight: bold;
   color: #fd2d01 !important;
@@ -134,7 +133,7 @@ export default {
 }
 
 .fullDiv {
-    background: url("https://www.renovationettravaux.fr/wp-content/uploads/2019/01/Prix-d%E2%80%99am%C3%A9nagement-de-bureau-professionnel.jpg")
+  background: url("https://www.renovationettravaux.fr/wp-content/uploads/2019/01/Prix-d%E2%80%99am%C3%A9nagement-de-bureau-professionnel.jpg")
     no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;

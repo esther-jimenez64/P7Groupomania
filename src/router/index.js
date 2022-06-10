@@ -6,8 +6,6 @@ import TheCreatePublication from '../views/TheCreatePublication.vue'
 import EspacePerso from '../views/EspacePerso.vue'
 import  ModifierUser  from '../views/ModifierUser.vue'
 import DeleteUser from '../views/DeleteUser.vue'
-import UserDesconect from '../views/UserDesconect.vue'
-import TheTest from '../views/TheTest.vue'
 const routes = [
     {
       path: '/',
@@ -45,16 +43,6 @@ const routes = [
       name: 'DeleteUser',
       component:DeleteUser, 
     },
-    {
-      path: '/DesconectUser',
-      name: 'DesconectUser',
-      component:UserDesconect
-    },
-    {
-      path: '/test',
-      name: 'TheTest',
-      component:TheTest
-    }
   ]
 
   const router = createRouter({

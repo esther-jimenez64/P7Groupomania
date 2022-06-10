@@ -8,7 +8,7 @@
         src="https://cdn-icons-png.flaticon.com/512/6568/6568636.png"
       />
       <div class="container">
-        <h4><b>deconnecter</b></h4>
+        <h4><b>Déconnecter</b></h4>
       </div>
     </div>
 
@@ -60,16 +60,18 @@ export default {
   },
   mounted() {
     this.created();
-        this.updateData();
+    this.updateData();
   },
    
   methods: {
-    updateData() {
-      setInterval(this.created, 2500);
+    updateData(){
+ setInterval(this.created, 2500);
     },
+    
+   
     deconnecter() {
      this.token= localStorage.removeItem("token");
-     
+       this.$router.push("/selfSpace")
        this.$router.push("/login");
      
       

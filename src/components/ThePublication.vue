@@ -8,7 +8,7 @@
   
     <h2 class="widget-post__title" id="post-header-title">
        <i class="fa fa-pencil" aria-hidden="true"></i>
-       <input v-model="title" placeholder="Title" required />
+       <input v-model="title" placeholder="Title"/>
     </h2>
   </div>
  

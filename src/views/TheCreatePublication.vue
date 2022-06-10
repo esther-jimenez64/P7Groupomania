@@ -9,244 +9,256 @@
   <div class="container">
     <router-view />
     <div class="row">
-      <div class="col-md-8">
-        <h1>Poster il y a peu</h1>
-        <ThePublication @newPost="getNewPost" />
-        <div
-          refs:hello
-          v-for="publication in publications"
-          :key="publication.id"
-          class="post-content"
-        >
-          <link
-            href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
-            rel="stylesheet"
-          />
+      <div class="bouge">
+        <div class="col-md-8">
+          <h1>Dernière publication</h1>
+          <ThePublication @newPost="getNewPost" />
+          <div
+            refs:hello
+            v-for="publication in publications"
+            :key="publication.id"
+            class="post-content"
+          >
+            <link
+              href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+              rel="stylesheet"
+            />
 
-          <div class="container">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="blog-card blog-card-blog">
-                  <a href="#">
-                    <img
-                      src="https://tse1.mm.bing.net/th?id=OIP.etoPZN5PSRA0lJXcXCm_KAHaHa&pid=Api&rs=1&c=1&qlt=95&w=123&h=123"
-                      alt="..."
-                      class="userImg"
-                    />
-                  </a>
-                  <ThePublicationDelete :publicationn="publication" />
-                  <span class="userName">{{ this.token.username }}</span>
-                  <button
-                    v-if="commentair"
-                    @click="this.showoff()"
-                    type="button"
-                    class="btn btn-modifyPost"
-                    data-v-5ce821ab=""
-                  >
-                    <label class="post-actionsModify" data-v-5ce821ab=""
-                      ><i
-                        class="fa fa-pencil-square-o"
-                        aria-hidden="true"
-                        data-v-5ce821ab=""
-                      ></i>
-                      Modify
-                    </label>
-                  </button>
-
-            <button
-  v-else
-  @click="this.show(publication.id)"
-  type="button"
-    class="btn btn-modifyPost"
-    data-v-5ce821ab="">
-
-<label class="post-actionsModify" data-v-5ce821ab="">
-  <i class="fa fa-pencil-square-o" aria-hidden="true" data-v-5ce821ab=""></i>
-   Modify
-</label>
-</button>
-
-<ThePublicationModify
-  v-if="commentair && editPostId == publication.id"
-  :publicationn="publication" />
-
-                  <div class="blog-card-image">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="blog-card blog-card-blog">
                     <a href="#">
                       <img
-                        v-if="publication.image"
-                        class="img"
-                        :src="publication.image"
-                        :alt="publication.title" /><img
-                        v-else
-                        src="https://tse1.mm.bing.net/th?id=OIP.XXWKhZZeWjrUPx-ZSfP0GAHaDt&pid=Api&P=0&w=332&h=166"
-                    /></a>
-                    <div class="ripple-cont"></div>
-                  </div>
-                
-                  <div class="datePost">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M96 32C96 14.33 110.3 0 128 0C145.7 0 160 14.33 160 32V64H288V32C288 14.33 302.3 0 320 0C337.7 0 352 14.33 352 32V64H400C426.5 64 448 85.49 448 112V160H0V112C0 85.49 21.49 64 48 64H96V32zM448 464C448 490.5 426.5 512 400 512H48C21.49 512 0 490.5 0 464V192H448V464z"/></svg>
-                       {{this.convertDate(publication.updatedAt)}}
-                   </div>
-                
+                        src="https://tse1.mm.bing.net/th?id=OIP.etoPZN5PSRA0lJXcXCm_KAHaHa&pid=Api&rs=1&c=1&qlt=95&w=123&h=123"
+                        alt="..."
+                        class="userImg"
+                      />
+                    </a>
+                    <ThePublicationDelete :publicationn="publication" />
 
-              
-                              
-                 <div class="blog-table">
-  <button
-    v-if="publication.Comments.length > 0"
-    @click="this.showAllComments(publication.id)"
-    type="button"
-    class="btn btn-d"
-    data-v-5ce821ab="">
-  <label class="post-actionsModify" data-v-5ce821ab="">
-    <i class="fa fa-comments" aria-hidden="true" data-v-5ce821ab="" ></i>
-    Afficher
-  </label>
-  </button>
-  <div
-    v-for="commentaire in publication.Comments"
-    :key="commentaire.id"
-    class="post-comment">
-  <div v-if="test && commentPostId == publication.id">
-          
-                        <div class="card mb-2">
-                          <div class="card-body p-2 p-sm-3">
-                            <div class="media forum-item">
-                              <a
-                                href="#"
-                                data-toggle="collapse"
-                                data-target=".forum-content"
-                                ><img
-                                  src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                                  class="mr-3 rounded-circle"
-                                  width="50"
-                                  alt="User"
-                              /></a>
-                              <div class="media-body">
-                                <h6>
-                                  <a
-                                    href="#"
-                                    data-toggle="collapse"
-                                    data-target=".forum-content"
-                                    class="text-body"
-                                    >{{ this.token.username }}</a
-                                  >
-                                </h6>
-                                <p class="text-secondary">
-                                  {{ commentaire.content }}
-                                </p>
+                    <button
+                      v-if="commentair"
+                      @click="this.showoff()"
+                      type="button"
+                      class="btn btn-modifyPost"
+                      data-v-5ce821ab=""
+                    >
+                      <label class="post-actionsModify" data-v-5ce821ab=""
+                        ><i
+                          class="fa fa-pencil-square-o"
+                          aria-hidden="true"
+                          data-v-5ce821ab=""
+                        ></i>
+                        Modify
+                      </label>
+                    </button>
+
+                    <button
+                      v-else
+                      @click="this.show(publication.id)"
+                      type="button"
+                      class="btn btn-modifyPost"
+                      data-v-5ce821ab=""
+                    >
+                      <label class="post-actionsModify" data-v-5ce821ab="">
+                        <i
+                          class="fa fa-pencil-square-o"
+                          aria-hidden="true"
+                          data-v-5ce821ab=""
+                        ></i>
+                        Modify
+                      </label>
+                    </button>
+                    <span class="userName">{{ this.token.username }}</span>
+                    <ThePublicationModify
+                      v-if="commentair && editPostId == publication.id"
+                      :publicationn="publication"
+                    />
+
+                    <div class="blog-card-image">
+                      <a href="#">
+                        <img
+                          v-if="publication.image"
+                          class="img"
+                          :src="publication.image"
+                          :alt="publication.title" /><img
+                          v-else
+                          src="https://tse1.mm.bing.net/th?id=OIP.XXWKhZZeWjrUPx-ZSfP0GAHaDt&pid=Api&P=0&w=332&h=166"
+                      /></a>
+                      <div class="ripple-cont"></div>
+                    </div>
+
+                    <div class="datePost">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512"
+                      >
+                        <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                        <path
+                          d="M96 32C96 14.33 110.3 0 128 0C145.7 0 160 14.33 160 32V64H288V32C288 14.33 302.3 0 320 0C337.7 0 352 14.33 352 32V64H400C426.5 64 448 85.49 448 112V160H0V112C0 85.49 21.49 64 48 64H96V32zM448 464C448 490.5 426.5 512 400 512H48C21.49 512 0 490.5 0 464V192H448V464z"
+                        />
+                      </svg>
+                      {{ this.convertDate(publication.updatedAt) }}
+                    </div>
+
+                    <div class="blog-table">
+                      <button
+                        v-if="publication.Comments.length > 0"
+                        @click="this.showAllComments(publication.id)"
+                        type="button"
+                        class="btn btn-d"
+                        data-v-5ce821ab=""
+                      >
+                        <label class="post-actionsModify" data-v-5ce821ab="">
+                          <i
+                            class="fa fa-comments"
+                            aria-hidden="true"
+                            data-v-5ce821ab=""
+                          ></i>
+                          Afficher
+                        </label>
+                      </button>
+                      <div
+                        v-for="commentaire in publication.Comments"
+                        :key="commentaire.id"
+                        class="post-comment"
+                      >
+                        <div v-if="test && commentPostId == publication.id">
+                          <div class="card mb-2">
+                            <div class="card-body p-2 p-sm-3">
+                              <div class="media forum-item">
+                                <a
+                                  href="#"
+                                  data-toggle="collapse"
+                                  data-target=".forum-content"
+                                  ><img
+                                    src="https://bootdey.com/img/Content/avatar/avatar2.png"
+                                    class="mr-3 rounded-circle"
+                                    width="50"
+                                    alt="User"
+                                /></a>
+                                <div class="media-body">
+                                  <h6>
+                                    <a
+                                      href="#"
+                                      data-toggle="collapse"
+                                      data-target=".forum-content"
+                                      class="text-body"
+                                      >{{ this.token.username }}</a
+                                    >
+                                  </h6>
+                                  <p class="text-secondary">
+                                    {{ commentaire.content }}
+                                  </p>
                                   <div class="dateComment">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M96 32C96 14.33 110.3 0 128 0C145.7 0 160 14.33 160 32V64H288V32C288 14.33 302.3 0 320 0C337.7 0 352 14.33 352 32V64H400C426.5 64 448 85.49 448 112V160H0V112C0 85.49 21.49 64 48 64H96V32zM448 464C448 490.5 426.5 512 400 512H48C21.49 512 0 490.5 0 464V192H448V464z"/></svg>
-                        {{this.convertDate(commentaire.updatedAt)}}
-                   </div>
-                                <button
-                                  v-if="coment"
-                                  @click="this.offComment()"
-                                  type="button"
-                                  class="btn btn-modifyComment"
-                                  data-v-5ce821ab=""
-                                >
-                                  <label
-                                    class="post-actionsModify"
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 448 512"
+                                    >
+                                      <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                                      <path
+                                        d="M96 32C96 14.33 110.3 0 128 0C145.7 0 160 14.33 160 32V64H288V32C288 14.33 302.3 0 320 0C337.7 0 352 14.33 352 32V64H400C426.5 64 448 85.49 448 112V160H0V112C0 85.49 21.49 64 48 64H96V32zM448 464C448 490.5 426.5 512 400 512H48C21.49 512 0 490.5 0 464V192H448V464z"
+                                      />
+                                    </svg>
+                                    {{
+                                      this.convertDate(commentaire.updatedAt)
+                                    }}
+                                  </div>
+                                  <button
+                                    v-if="coment"
+                                    @click="this.offComment()"
+                                    type="button"
+                                    class="btn btn-modifyComment"
                                     data-v-5ce821ab=""
-                                    ><i
-                                      class="fa fa-pencil-square-o"
-                                      aria-hidden="true"
+                                  >
+                                    <label
+                                      class="post-actionsModify"
                                       data-v-5ce821ab=""
-                                    ></i>
-                                    Modify
-                                  </label>
-                                </button>
+                                      ><i
+                                        class="fa fa-pencil-square-o"
+                                        aria-hidden="true"
+                                        data-v-5ce821ab=""
+                                      ></i>
+                                      Modify
+                                    </label>
+                                  </button>
 
-                                <button
-                                  v-else
-                                  @click="this.showComment()"
-                                  type="button"
-                                  class="btn btn-modifyComment"
-                                  data-v-5ce821ab=""
-                                >
-                                  <label
-                                    class="post-actionsModify"
+                                  <button
+                                     v-else
+                                    @click="this.showComment(commentaire.id)"
+                                    type="button"
+                                    class="btn btn-modifyComment"
                                     data-v-5ce821ab=""
-                                    ><i
-                                      class="fa fa-pencil-square-o"
-                                      aria-hidden="true"
+                                  >
+                                    <label
+                                      class="post-actionsModify"
                                       data-v-5ce821ab=""
-                                    ></i>
-                                    Modify
-                                  </label>
-                                </button>
+                                      ><i
+                                        class="fa fa-pencil-square-o"
+                                        aria-hidden="true"
+                                        data-v-5ce821ab=""
+                                      ></i>
+                                      Modify
+                                    </label>
+                                  </button>
 
-                               
-
-                              
                                   <CommentDelete
-                                  :publicationn="publication"
-                                  :commentt="commentaire"
-                                />
-                                <CommentModify
-                                  v-if="coment"
-                                  :publicationn="publication"
-                                  :commentt="commentaire"
-                                />
-
-
-
-
-                              
-                              </div>
-                              <div
-                                class="text-muted small text-center align-self-center"
-                              >
-                            
-                                
-                               
+                                    :publicationn="publication"
+                                    :commentt="commentaire"
+                                  />
+                                  <CommentModify
+                                    :publicationn="publication"
+                                    :commentt="commentaire"
+                                     v-if="coment  && commentaire.id == commentId"
+                                  />
+                                </div>
+                                <div
+                                  class="text-muted small text-center align-self-center"
+                                ></div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  <h4 class="blog-card-caption">{{ publication.title }}</h4>
+                    <h4 class="blog-card-caption">{{ publication.title }}</h4>
 
-                  <i class="far fa-newspaper"></i>
+                    <i class="far fa-newspaper"></i>
 
-                  <div>
-                    <p class="limit">{{ publication.content }}</p>
-                    <div class="ftr">
-                      <div class="author">
-                        <a href="#">
-                          <img
-                            src="https://tse1.mm.bing.net/th?id=OIP.etoPZN5PSRA0lJXcXCm_KAHaHa&pid=Api&rs=1&c=1&qlt=95&w=123&h=123"
-                            alt="..."
-                            class="avatar img-raised"
-                          />
-                          <span>{{ this.token.username }}</span>
-                          <div class="detailBox">
-                               <form
-                              @submit.prevent="save(publication.id)"
-                              class="form-inline"
-                              role="form"
-                            >
-                              <input
-                              @click.prevent="this.showComment()"
-                                :id="`input-comment-${publication.id}`"
-                                class="form-control"
-                                type="text"
-                                placeholder="Your comments"
-                              />
-                              <button
-                                   
-                                class="button-62"
-                                role="button"
+                    <div>
+                      <p class="limit">{{ publication.content }}</p>
+                      <div class="ftr">
+                        <div class="author">
+                          <a href="#">
+                            <img
+                              src="https://tse1.mm.bing.net/th?id=OIP.etoPZN5PSRA0lJXcXCm_KAHaHa&pid=Api&rs=1&c=1&qlt=95&w=123&h=123"
+                              alt="..."
+                              class="avatar img-raised"
+                            />
+                            <span>{{ this.token.username }}</span>
+                            <br />
+                            <div class="detailBox">
+                              <form
+                                @submit.prevent="save(publication.id)"
+                                class="form-inline"
+                                role="form"
                               >
-                                publish
-                              </button>
-                            </form>
-                          </div>
-                        </a>
+                                <input
+                                  @click.prevent="this.showComment()"
+                                  :id="`input-comment-${publication.id}`"
+                                  class="form-control"
+                                  type="text"
+                                  placeholder="Your comments"
+                                />
+                                <button class="button-62" role="button">
+                                  publish
+                                </button>
+                              </form>
+                            </div>
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -287,7 +299,8 @@ export default {
       coment: false,
       comentDelete: false,
       editPostId: null,
-      commentPostId: null
+      commentPostId: null,
+      commentId: null,
     };
   },
 
@@ -302,48 +315,50 @@ export default {
   },
 
   methods: {
+    showComment(id) {
+  this.coment = true;
+  this.commentId = id;
+},
     showAllComments(postId) {
-  if (!this.test) {
-    this.test = true;
-    this.commentPostId = postId;
-  } else {
-    this.test = false;
-    this.commentPostId = null;
-  }
-},
+      if (!this.test) {
+        this.test = true;
+        this.commentPostId = postId;
+      } else {
+        this.test = false;
+        this.commentPostId = null;
+      }
+    },
     show(postId) {
-  this.commentair = true;
-  this.editPostId = postId;
-},
-showoff() {
-  this.commentair = false;
-  this.editPostId = null;
-},
-      convertDate(updatedAt){
-        let substring = updatedAt.substring(0,10);
-         let substringo = updatedAt.substring(11,19);
-            return substring +"-" + substringo ;
-        },
+      this.commentair = true;
+      this.editPostId = postId;
+    },
+    showoff() {
+      this.commentair = false;
+      this.editPostId = null;
+    },
+    convertDate(updatedAt) {
+      let substring = updatedAt.substring(0, 10);
+      let substringo = updatedAt.substring(11, 19);
+      return substring + "-" + substringo;
+    },
     showCommentDelete() {
       this.comentDelete = true;
     },
     offCommentDelete() {
       this.comentDelete = false;
     },
-    showComment() {
-      this.coment = true;
-    },
+
     offComment() {
       this.coment = false;
     },
-   
+
     showff() {
       this.test = true;
     },
     showff2() {
       this.test = false;
     },
-  
+
     updateData() {
       setInterval(this.created, 2500);
     },
@@ -358,14 +373,14 @@ showoff() {
         .then((response) => (this.publications = response.data));
     },
 
-          save(id) {
+    save(id) {
       console.log(id);
-      this.test =true
+      this.test = true;
       const value = document.getElementById(`input-comment-${id}`).value;
       const formData = {
         content: value,
         postId: this.id,
-        username:this.token.user
+        username: this.token.user,
       };
       const PostId = id;
       console.log(value);
@@ -376,11 +391,10 @@ showoff() {
           },
         })
         .then((response) => console.log(response));
-     document.getElementById(`input-comment-${id}`).value="";
+      document.getElementById(`input-comment-${id}`).value = "";
       this.updateData();
     },
   },
-
 
   test(value) {
     console.log(value);
@@ -390,40 +404,144 @@ showoff() {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@media (min-width: 576px) {
+  .form-inline .form-control[data-v-7a034ad9] {
+    display: inline-block;
+    vertical-align: middle;
+    width: 411px;
+  }
+}
+@media screen and (min-width: 425px) and (max-width: 768px) {
+  .bouge {
+    position: relative;
+    right: 7px;
+  }
+}
 
-/*==================================================
-  Post Contents CSS
-  ==================================================*/
-  .datePost {
+@media screen and (min-width: 990px) and (max-width: 2024px) {
+  .bouge {
     position: relative;
-    left: 15px;
-    top: 5px;
+    left: 160px;
+  }
 }
- .datePost svg {
-    width:11px;
+@media screen and (min-width: 768px) and (max-width: 990px) {
+  .bouge {
     position: relative;
-    bottom: 1.5px;
+    left: 80px;
+  }
 }
- .dateComment svg {
-    width:11px;
+
+@media screen and (min-width: 150px) and (max-width: 575px) {
+  .button-62 {
+    background: #a1a1a1;
+    background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
+    border: 0;
+    color: #ffffff;
+    cursor: pointer;
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial,
+      sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 2.5;
+    outline: transparent;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow 0.2s ease-in-out;
+    height: 85px;
+    width: 85px;
+    background-color: #bbb;
+    border-radius: 50%;
     position: relative;
-    bottom: 1.5px;
+    left: 195px;
+  }
+  .form-control[data-v-7a034ad9] {
+    width: 500px;
+  }
+  .button-62:not([disabled]):focus {
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+      -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+      0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+  }
+
+  .button-62:not([disabled]):hover {
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+      -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+      0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+  }
+}
+@media screen and (min-width: 576px) and (max-width: 2000px) {
+  .button-62 {
+    background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
+    border: 0;
+    border-radius: 12px;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial,
+      sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 2.5;
+    outline: transparent;
+    padding: 0 1rem;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow 0.2s ease-in-out;
+    -moz-user-select: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    position: relative;
+    right: 8px;
+    bottom: 2px;
+    height: 45px;
+    width: 89px;
+  }
+
+  .button-62:not([disabled]):focus {
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+      -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+      0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+  }
+
+  .button-62:not([disabled]):hover {
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+      -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+      0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+  }
+}
+
+.datePost {
+  position: relative;
+  left: 15px;
+  top: 5px;
+}
+.datePost svg {
+  width: 11px;
+  position: relative;
+  bottom: 1.5px;
+}
+.dateComment svg {
+  width: 11px;
+  position: relative;
+  bottom: 1.5px;
 }
 .dateComment {
-    position: relative;
-    left: 240px;
+  position: relative;
+  left: 240px;
 }
 * p {
   width: 300px;
 }
 .limit {
-    margin-bottom: 150px;
-    margin-top: -25px;
-    margin-bottom: 1rem;
-    word-wrap: break-word;
-    width: 475px;
-    margin-left: 15px;
-    margin-right: 150px;
+  margin-bottom: 150px;
+  margin-top: -25px;
+  margin-bottom: 1rem;
+  word-wrap: break-word;
+  width: 475px;
+  margin-left: 15px;
+  margin-right: 150px;
 }
 body {
   margin-top: 20px;
@@ -474,49 +592,11 @@ body {
   margin-top: 20px;
 }
 input#input-comment-13 {
-    width: 300px;
-    position: relative;
-    height: 35px;
-}
-.button-62 {
-      background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
-    border: 0;
-    border-radius: 12px;
-    color: #ffffff;
-    cursor: pointer;
-    display: inline-block;
-    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 2.5;
-    outline: transparent;
-    padding: 0 1rem;
-    text-align: center;
-    text-decoration: none;
-    transition: box-shadow 0.2s ease-in-out;
-    -moz-user-select: none;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    white-space: nowrap;
-    position: relative;
-    right: 8px;
-    bottom: 2px;
-    height: 45px;
-    width: 89px;
+  width: 300px;
+  position: relative;
+  height: 35px;
 }
 
-.button-62:not([disabled]):focus {
-  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
-    -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
-    0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
-}
-
-.button-62:not([disabled]):hover {
-  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
-    -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
-    0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
-}
 .btn:hover {
   color: #222;
   text-decoration: none;
@@ -567,8 +647,9 @@ img.userImg {
 }
 span.userName {
   position: relative;
-  bottom: 10px;
-  right: 65px;
+  bottom: 1px;
+  right: 145px;
+  margin-right: -150px;
 }
 @media (min-width: 768px) {
   .col-md-4 {
@@ -588,11 +669,24 @@ span.userName {
 .notShown {
   visibility: hidden !important;
 }
-h1 {
-  text-align: center;
-  margin-bottom: 50px;
-  margin-top: 50px;
+@media screen and (min-width: 276px) and (max-width: 767px) {
+  h1 {
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    position: relative;
+  }
 }
+@media screen and (min-width: 768px) and (max-width: 2000px) {
+  h1 {
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    position: relative;
+    left: 80px;
+  }
+}
+
 a {
   font-family: Roboto;
 }
@@ -711,14 +805,14 @@ p {
   align-content: flex-start;
   justify-content: flex-start;
 }
-button.btn.btn-modifyPost{
+button.btn.btn-modifyPost {
   background-color: #4e5166b3;
   color: white;
   position: relative;
-  left: 250px;
+  left: 270px;
   height: 35px;
 }
-button.btn-btn-time{
+button.btn-btn-time {
   background-color: #4e5166b3;
   color: white;
 }
@@ -746,7 +840,7 @@ button.btn.btn-d:hover {
   left: 250px;
 }
 
-button.btn.btn-modifyComment{
+button.btn.btn-modifyComment {
   background-color: #4e5166b3;
   color: white;
   position: relative;
@@ -1049,18 +1143,18 @@ body {
     width: 320px;
   }
 }
-@media (min-width: 576px){
-.form-inline .form-control {
+@media (min-width: 576px) {
+  .form-inline .form-control {
     display: inline-block;
     vertical-align: middle;
     width: 348px;
+  }
 }
-}
-button.btn.btn-Modify[data-v-7a034ad9][data-v-a679a10e][data-v-a679a10e]:hover{
-  color:black;
+button.btn.btn-Modify[data-v-7a034ad9][data-v-a679a10e][data-v-a679a10e]:hover {
+  color: black;
 }
 input#input-comment-13[data-v-7a034ad9] {
-    position: relative;
-    height: 35px;
+  position: relative;
+  height: 35px;
 }
 </style>
