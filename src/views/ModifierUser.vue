@@ -1,8 +1,7 @@
 <template>
   <div id="test">
     <link rel="icon" href="icon.ico" />
-
-    <div class="card" @click="deconnecter">
+    <div class="card">
       <img
         class="profile-img"
         src="https://cdn-icons-png.flaticon.com/512/6568/6568636.png"
@@ -13,7 +12,7 @@
     </div>
 
     <div class="login">
-      <h1>Vos informations</h1>
+      <h1>Vos informations</h1> <!--écoute du submit de l'input en passant une function -->
       <form @submit.prevent="guardar()" method="post">
         <input
           v-model="email"
@@ -21,86 +20,67 @@
           placeholder="votre nouvelle email"
           name="p"
           required
-        />
+        /><!--V-model email pour la liaison d'entrée de formulaire bidirectionnelle-->
         <input
-        v-model="password"
-        type="password"
-        placeholder="Votre mot de passe"
-        minlength="8"
-        required
-      />
+          v-model="password"
+          type="password"
+          placeholder="Votre mot de passe"
+          minlength="8"
+          required
+        /><!--V-model password pour la liaison d'entrée de formulaire bidirectionnelle-->
         <input
           v-model="username"
           placeholder="Votre nouveaux nom user"
           type="text"
           name="u"
           required
-        />
-         <button class="btn btn-primary btn-block btn-large">Modifier</button>
+        /><!--V-model username pour la liaison d'entrée de formulaire bidirectionnelle-->
+        <button class="btn btn-primary btn-block btn-large">Modifier</button>
       </form>
     </div>
   </div>
 </template>
 
-
 <script>
-import axios from "axios";
-export default {
-  emit: ["users"],
-  props: ["photosPros"],
-  data() {
+import axios from "axios";                   /*Import d'axios pour effectuer mes requêtes http*/ /*importer un SFC comme un module*/
+export default {                              /*définir les événements à  émettre vers son parent*/
+  emit: ["users"],                             /*définir les événements à  émettre vers son parent*/
+  data() {                                   /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
-      album: 1,
+      album: 1,                               /*donnée réactif du v-model*/
       post: "",
       email: "",
       password: "",
       username: "",
-      counter: JSON.parse(localStorage.getItem("token")),
-      photos: [],
+      token: JSON.parse(localStorage.getItem("token")),          /*Récupération du token présent dans le local storage*/
     };
   },
 
-  methods: {
-    guardar() {
+  methods: {/*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
+    guardar() {  /*Fonction qui écoute le submit et modifi l'user grâce à l'id*/
       const postData = {
         username: this.username,
         email: this.email,
         password: this.password,
-        id:this.counter.userId
+        id: this.token.userId,
       };
-      const id = this.counter.userId;
-      console.log(id);
+      const id = this.token.userId;              /*Récupération de l'id de l'user qui est dans le LocalStorage*/
       axios
         .put(`http://localhost:3000/api/user/${id}/modify`, postData, {
-          headers: {
-            Authorization: "Bearer " + this.counter.token,
-          },
-        })
-        .then((response) => {
-          console.log(response.data);
-        
-          this.$router.push("/selfSpace");
-        });
-    },
-      created() {
-      const id = this.token.userId;
-      axios
-        .get(`http://localhost:3000/api/user/${id}`, {
           headers: {
             Authorization: "Bearer " + this.token.token,
           },
         })
-        .then((response) => (this.photos = response.data));
+        .then((response) => {
+          console.log(response.data);
+          this.$router.push("/selfSpace");    /*Nous redirigeons vers la page espace personnel*/
+        });
     },
-    newStorage(){
-     
-    }
   },
 };
 </script>
 <style scoped>
-<style scoped>
-::placeholder {
+ ::placeholder {
   color: white;
   font-size: 1.3em;
 }
@@ -364,4 +344,3 @@ b {
   font-size: 18px;
 }
 </style>
-

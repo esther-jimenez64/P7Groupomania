@@ -29,9 +29,8 @@
                 placeholder="Insérer votre email"
                 required
                 autofocus
-              />
-             
-              <br/>
+              /><!--V-model email pour la liaison d'entrée de formulaire bidirectionnelle-->
+              <br />
               <input
                 class="form-control"
                 v-model="password"
@@ -39,28 +38,26 @@
                 placeholder="Choisisez un mot de passe"
                 minlength="8"
                 required
-              />
-              
-
+              /><!--V-model password pour la liaison d'entrée de formulaire bidirectionnelle-->
               <input
                 v-model="username"
                 class="form-control"
                 placeholder="Crée votre username "
                 required
-              />
+              /><!--V-model username pour la liaison d'entrée de formulaire bidirectionnelle-->
               <br />
               <button
                 @click.prevent="sendPost()"
                 class="btn btn-lg btn-primary btn-block sign-in"
                 type="submit"
-              >
-                 <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
+              ><!--écoute du clic du bouton en passant une function -->
+                <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
                 Sign in
               </button>
-              <router-link  class="pull-right need-help" to="/login"
-                >Déjà Inscrit ? Connecter vous</router-link
-              >
-              <router-view />
+              <router-link class="pull-right need-help" to="/login" 
+                >Déjà Inscrit ? Connecter vous</router-link 
+              ><!--link vers views-->
+              <router-view /><!--router-view affichera le composant qui correspond à l'url.-->
               >
             </form>
           </div>
@@ -71,59 +68,61 @@
 </template>
 
 <script>
-import axios from "axios";
-export default {
-  data: function () {
+import axios from "axios";  /*Import d'axios pour effectuer mes requêtes http*/
+export default {           /*importer un SFC comme un module*/
+  data: function () {     /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
-      username: "",
+      username: "",          /*donnée réactif du v-model*/
       email: "",
       password: "",
-      show: false,
-      chest:false
     };
   },
-  methods: {
+  methods: {/*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
     sendPost() {
-        if (this.email.length < 5) { //Condition si le mot de pass est trop court non//
-      alert('Votre email doit contenir au moins 5 caractères');
-  }
-     if (this.username.length < 2) { //Condition si le mot de pass est trop court non//
-      alert('Votre username doit contenir au moins 5 caractères');
-  }
-        if (this.password.length < 5) { //Condition si le mot de pass est trop court non//
-      alert('Votre Mot de pass doit contenir au moins 5 caractères');
-  }
-  if (this.password.length > 50) { //S'il est trop long non//
-      alert('Votre Mots de pass ne peux  contenir plus de 50 caractères');
-  }
-    const regexEmail = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/
-  if (!regexEmail.test(this.email)) { //Si la regex n'est pas respecté alors non//
-     alert('Vous devait rentrer une Adresse Email valide');
-  }
-  const regexPassword = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]))/; //Regex pour valider le formulaire doit contenir 1 majuscule ////1 caractère spécial et un chiffre//
-  if (!regexPassword.test(this.password)&& this.password.length > 5) { //Si la regex n'est pas respecté alors non//
-    alert('Votre Mots de pass dois contenir au moins 1 caractère spéciaux une majuscule et un chiffre');
-    
-  }
-  const postData = {
+      if (this.email.length < 5) {
+        //Condition si le mail est trop court non//
+        alert("Votre email doit contenir au moins 5 caractères");
+      }
+      if (this.username.length < 2) {
+        //Condition si le username est trop court non//
+        alert("Votre username doit contenir au moins 5 caractères");
+      }
+      if (this.password.length < 5) {
+        //Condition si le mot de pass est trop court non//
+        alert("Votre Mot de pass doit contenir au moins 5 caractères");
+      }
+      if (this.password.length > 50) {
+        //S'il est trop long non//
+        alert("Votre Mots de pass ne peux  contenir plus de 50 caractères");
+      }
+      const regexEmail = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
+      if (!regexEmail.test(this.email)) {
+        //Si la regex n'est pas respecté alors non//
+        alert("Vous devait rentrer une Adresse Email valide");
+      }
+      const regexPassword = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]))/; //Regex pour valider le formulaire doit contenir 1 majuscule ////1 caractère spécial et un chiffre//
+      if (!regexPassword.test(this.password) && this.password.length > 5) {
+        //Si la regex n'est pas respecté alors non//
+        alert(
+          "Votre Mots de pass dois contenir au moins 1 caractère spéciaux une majuscule et un chiffre"
+        );
+      }
+      const postData = {  /*objet avec les value */
         username: this.username,
         email: this.email,
         password: this.password,
       };
       axios.post("http://localhost:3000/api/user/signup", postData).then(() => {
-      
         this.$router.push("/login");
       });
-     
     },
   },
 };
 </script>
-
 <style scoped>
 #test a[data-v-092dea1e] {
   font-weight: bold;
-  color:#FD2D01!important;
+  color: #fd2d01 !important;
 }
 .a.pull.right.need-help {
   color: red;
@@ -131,10 +130,9 @@ export default {
 .btn-primary {
   background-color: white;
   border-color: silver;
-  color:#FD2D01;
-  font-family: 'Lato', bold;
+  color: #fd2d01;
+  font-family: "Lato", bold;
 }
-
 
 #test {
   padding: 30px;
@@ -143,7 +141,7 @@ export default {
 #test a {
   font-weight: bold;
   color: #red;
-  font-family: 'Lato', bold;
+  font-family: "Lato", bold;
 }
 
 #test a.router-link-exact-active {
@@ -279,5 +277,4 @@ export default {
 .sign-in {
   margin-bottom: 20px;
 }
-
 </style>

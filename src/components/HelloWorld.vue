@@ -7,67 +7,61 @@
     href="https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Roboto:ital@1&display=swap"
     rel="stylesheet"
   />
- 
-    <head>
-      <title>Your Title here</title>
-      <link
-        rel="stylesheet"
-        href="https://bootswatch.com/4/lumen/bootstrap.min.css"
-      />
-    </head>
-    <header>
-      <h1>Groupomania</h1>
-      
-      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
-      <nav>
-        <ul>
-          <li>
-            <a><router-link to="/">Accueil</router-link></a>
-          </li>
-          <li><router-link v-if="token" to="/posts">Forum</router-link></li>    
-          <li><router-link v-if="token == null" to="/singup">Inscription</router-link></li>
-          <li><router-link v-if="token == null" to="/login"> Connecter vous</router-link></li>
-           <li >
-            <router-link  v-if="token"    to="/selfSpace">
-              Espace Personel</router-link
-            >
-          </li>
-     
-        </ul>
-      </nav>
-      <label for="nav-toggle" class="nav-toggle-label">
-        <span></span>
-      </label>
-    </header>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://bootswatch.com/4/lumen/bootstrap.min.css"
+    />
+  </head>
+  <header>
+    <h1>Groupomania</h1>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+    <nav>
+      <ul>
+        <li>
+          <a><router-link to="/">Accueil</router-link></a>  <!-- link vers les autres views Accueil-->
+        </li>
+        <li><router-link v-if="token" to="/posts">Forum</router-link></li> <!-- link vers views avec condition si l'user à un token-->
+        <li>                                                           <!--link vers views avec condition si l'user n'a pas de token-->
+          <router-link v-if="token == null" to="/signup"  
+            >Inscription</router-link
+          >
+        </li>
+        <li>                                                         <!--link vers views avec condition si l'user n'a pas de token -->
+          <router-link v-if="token == null" to="/login">
+            Connecter vous</router-link
+          >
+        </li>
+        <li>                                                                 <!--link vers views avec condition si l'user à un token-->
+          <router-link v-if="token" to="/selfSpace">
+            Espace Personel</router-link
+          >
+        </li>
+      </ul>
+    </nav>
+    <label for="nav-toggle" class="nav-toggle-label">
+      <span></span>
+    </label>
+  </header>
 </template>
 
 <script>
-
 export default {
-  
-  data: function () {
-
+  data: function () { /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
-      email: "",
-      password: "",
-      photos: [],
       token: JSON.parse(localStorage.getItem("token")),
-  components: {},
-  test:false
+      components: {},
     };
   },
- 
-  created(){
-this.testo
+  created() {
+    this.takeToken();
   },
   methods: {
-       testo() {
-      this.token = JSON.parse(localStorage.getItem("token"));
+    takeToken() {
+      this.token = JSON.parse(localStorage.getItem("token")); /*Récupération du token présent dans le local storage*/
     },
   },
-}
-
- 
+};
 </script>
 
 <style>
@@ -78,7 +72,6 @@ h1 header {
   margin-left: -100px;
   font-family: "Lato", bold;
 }
-
 h1 {
   color: #fd2d01;
   font-family: "Lato", bold;
@@ -86,7 +79,6 @@ h1 {
 :root {
   --background: rgba(0, 214, 170, 0.85);
 }
-
 *,
 *::before,
 *::after {
@@ -98,7 +90,6 @@ a body {
   font-family: "Work Sans", sans-serif;
   font-weight: 400;
 }
-
 .content {
   height: 200vh;
   background-color: #333;
@@ -107,9 +98,7 @@ a body {
   display: grid;
   place-items: center;
 }
-
 /* navigation styles start here */
-
 header {
   background: white;
   text-align: center;
@@ -184,7 +173,7 @@ nav {
 nav ul {
   margin: 0;
   padding: 0;
-   margin-top: 15px;
+  margin-top: 15px;
   list-style: none;
 }
 
@@ -231,7 +220,6 @@ nav a:hover {
   }
 
   nav {
-    /* the following lines are not from my video, but add Edge support */
     position: relative;
     text-align: left;
     transition: none;
@@ -239,7 +227,6 @@ nav a:hover {
     background: none;
     top: initial;
     left: initial;
-    /* end Edge support stuff */
     grid-column: 3 / 4;
     display: flex;
     justify-content: flex-end;
@@ -248,7 +235,6 @@ nav a:hover {
 
   nav ul {
     display: flex;
-   
   }
 
   nav li {

@@ -9,14 +9,13 @@
               role="alert"
               data-brk-library="component__alert"
             >
-              <i class="start-icon far fa-times-circle faa-pulse animated"></i>
+              <i class="start-icon far fa-times-circle faa-pulse animated"></i><!--Définir l'user name avec les données data-->
               <strong class="font__weight-semibold"
-                ><span>{{ this.photos.username }}</span></strong
+                ><span>{{ this.token.username }}</span></strong 
               >
-              Vous etes sur de vouloir suprimer votre compte cette acion sera
-              irreversible
+              Vous êtes sûr de vouloir supprimer votre compte, cette action sera irréversible
             </div>
-            <button  @click="deleteUser()" class="button">
+            <button @click="deleteUser()" class="button"> <!--écoute du clic du bouton en passant une function -->
               <div class="trash">
                 <div class="top">
                   <div class="paper"></div>
@@ -28,7 +27,7 @@
                   </svg>
                 </div>
               </div>
-              <span>Delete Item</span>
+              <span>Delete User</span>
             </button>
           </div>
         </div>
@@ -38,47 +37,39 @@
 </template>
 
 <script>
-import axios from "axios";
-export default {
+import axios from "axios"; /*Import d'axios pour effectuer mes requêtes http*/ /*importer un SFC comme un module*/
+export default {                      /*définir les événements à  émettre vers son parent*/
   emit: ["users"],
-  props: ["photosProps"],
-  data() {
-    return {
-      album: 1,
+  data() {                             /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
+    return {                          /*donnée réactif du v-model*/
       post: "",
       email: "",
       password: "",
       username: "",
-      counter: JSON.parse(localStorage.getItem("token")),
-      photos: [],
+      token: JSON.parse(localStorage.getItem("token")), /*Récupération du token présent dans le local storage*/
     };
   },
-  mounted() {
-   console.log(this.users)
-  },
-
-  methods: {
-  deleteUser() {
-      const id = this.counter.userId;
-      console.log(id);
+ 
+  methods: {/*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
+    deleteUser() {   /*Fonction qui écoute le clic et supprime le post en question grâce à l'id*/
+      const id = this.token.userId;   /*Récupération de l'id de l'user qui est dans le LocalStorage*/
       axios
         .delete(`http://localhost:3000/api/user/${id}/delete`, {
           headers: {
-            Authorization: "Bearer " + this.counter.token,
+            Authorization: "Bearer " + this.token.token,
           },
         })
         .then((response) => {
           console.log(response.data);
-          localStorage.removeItem("token");
-            this.$router.push("/singup");
-        
+          localStorage.removeItem("token");/*Nous retirons le token du LocalStorage*/
+          this.$router.push("/signup");    /*Nous redirigeons vers la page login*/
         });
     },
   },
 };
 </script>
 <style scoped>
-.col-sm-12{
+.col-sm-12 {
   margin-top: 150px;
 }
 #test {
@@ -86,7 +77,6 @@ export default {
   width: 100%;
   height: 700px;
 }
-
 
 .alert > .start-icon {
   margin-right: 0;
@@ -553,7 +543,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-span{
-  color:white;
+span {
+  color: white;
 }
 </style>

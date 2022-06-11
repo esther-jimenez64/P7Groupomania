@@ -29,7 +29,7 @@
                 placeholder="Insérer votre email"
                 required
                 autofocus
-              />
+              /><!--V-model email pour la liaison d'entrée de formulaire bidirectionnelle-->
               <br />
               <input
                 class="form-control"
@@ -38,19 +38,18 @@
                 placeholder="Insérer votre mot de passe"
                 minlength="8"
                 required
-              />
-              <button
+              /><!--V-model password pour la liaison d'entrée de formulaire bidirectionnelle-->
+              <button 
                 @click.prevent="sendPost()"
                 class="btn btn-lg btn-primary btn-block sign-in"
                 type="submit"
-              >
+              ><!--écoute du clic du bouton en passant une function -->
                 <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
-
                 Login
               </button>
-              <router-link class="pull-right need-help" to="/singup">
+              <router-link class="pull-right need-help" to="/signup"><!--link vers views-->
                 Pas de compte ? Inscrivez vous</router-link
-              ><router-view />
+              ><router-view /><!--router-view affichera le composant qui correspond à l'url.-->
             </form>
           </div>
         </div>
@@ -60,38 +59,33 @@
 </template>
 
 <script>
-import axios from "axios";
-export default {
-  emit: ["closeModal"],
-  data: function () {
+import axios from "axios"; /*Import d'axios pour effectuer mes requêtes http*/
+export default {  /*importer un SFC comme un module*/
+  data: function () {        /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
-      email: "",
+      email: "",            /*donnée réactif du v-model*/
       password: "",
-      photos: [],
-      token: JSON.parse(localStorage.getItem("token")),
+      token: JSON.parse(localStorage.getItem("token")),   /*Récupération du token présent dans le local storage*/
     };
   },
-  methods: {
-    goToPost() {
+  methods: {/*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
+    goToPost() {/*fontion qui redirige vers le view posts*/
       this.$router.push("/posts");
     },
-    mounted() {
+    mounted() {   /*lors du cycle de vie vu mounted en récupère le toke du LS*/
       this.token = JSON.parse(localStorage.getItem("token"));
     },
-    sendPost() {
-      const postData = {
+    sendPost() {  /*Fonction qui post qui envois l'user à la database*/
+      const postData = {  /*objet avec les value */
         email: this.email,
         password: this.password,
       };
-
       axios
-
         .post("http://localhost:3000/api/user/login", postData)
         .then((res) => {
-          localStorage.setItem("token", JSON.stringify(res.data));
-          this.token = JSON.parse(localStorage.getItem("token"));
-          this.$emit("closeModal", this.token);
-          this.goToPost();
+   localStorage.setItem("token", JSON.stringify(res.data));/*on crée l'item token en lui passe les données de la res 200 token username userId*/
+          this.token = JSON.parse(localStorage.getItem("token")); /*Ensuite, nous le récupérons*/
+          this.goToPost();                                       /* redirige vers le view posts*/
         })
         .catch((res) => {
           /*erreur possible et alert*/

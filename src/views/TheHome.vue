@@ -5,7 +5,6 @@
     </head>
     <div id="test">
       <div class="bg"></div>
-
       <div class="blog-card spring-fever">
         <div class="title-content">
           <h3><a href="#">Groupomania</a></h3>
@@ -15,12 +14,11 @@
           Est un réseau social interne pour les employés de Groupomania. Le but
           est de faciliter les interactions entre collègues.Avec plusieurs
           fonctionnalités pour favoriser les échanges entre collègues.
-          <router-link to="/singup"
+          <router-link to="/signup"
             >Nous Rejoindre<span class="licon icon-arr icon-black"></span
-          ></router-link>
-          <router-view />
+          ></router-link> <!--link vers views-->
+          <router-view />  <!--router-view affichera le composant qui correspond à l'url.-->
         </div>
-
         <div class="gradient-overlay"></div>
         <div class="color-overlay"></div>
       </div>
@@ -37,10 +35,8 @@
 .bg {
   /* The image used */
   background-image: url("https://jooinn.com/images/white-buiding-6.jpg");
-
   /* Full height */
   height: 100%;
-
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;

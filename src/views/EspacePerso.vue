@@ -1,8 +1,7 @@
 <template>
   <div id="test">
     <link rel="icon" href="icon.ico" />
-
-    <div class="card" @click="deconnecter">
+    <div class="card" @click="deconnecter"> <!--écoute du clic  en passant une function -->
       <img
         class="profile-img"
         src="https://cdn-icons-png.flaticon.com/512/6568/6568636.png"
@@ -14,80 +13,74 @@
 
     <div class="login">
       <h1>Vos informations</h1>
-      <form method="post">
+      <form method="post"><!--placeHolder dynamique avec v-blind lier un attribut HTML à une expression JavaScript. qui contient l' username dans les données data-->
         <input
           v-model="username"
-          :placeholder="[[this.photos.username]]"
+          :placeholder="[[this.Users.username]]"
           type="text"
           name="u"
-        />
+        />  <!--v-model username pour la liaison d'entrée de formulaire  bidirectionnelle. -->
         <input
           v-model="email"
           type="email"
-          :placeholder="[[photos.email]]"
+          :placeholder="[[Users.email]]"
           name="p"
-        />
+        />  <!--v-model email pour la liaison d'entrée de formulaire  bidirectionnelle. -->
         <router-link
           class="btn btn-primary btn-block btn-large"
           to="/ModifyUser"
         >
-          Modifier</router-link
-        >
+          Modifier</router-link 
+        ><!--link vers views modify-->
         <router-link
           class="btn btn-primary btn-block btn-large"
           to="/DeleteUser"
         >
           Suprimer</router-link
-        >
+        ><!--link vers views supprimer-->
       </form>
     </div>
   </div>
 </template>
 <script>
-import axios from "axios";
-export default {
-  props: ["photosPros"],
-  data() {
+import axios from "axios";   /*Import d'axios pour effectuer mes requêtes http*/ /*importer un SFC comme un module*/
+export default {            /*définir les événements à  émettre vers son parent*/
+  data() {                    /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
-      album: 1,
-      post: "",
+      post: "",                /*donnée réactif du v-model*/
       email: "",
       password: "",
       username: "",
-      token: JSON.parse(localStorage.getItem("token")),
-      photos: [],
+      token: JSON.parse(localStorage.getItem("token")),       /*Récupération du token présent dans le local storage*/
+      Users: [],
     };
   },
   mounted() {
     this.created();
     this.updateData();
   },
-   
-  methods: {
-    updateData(){
- setInterval(this.created, 2500);
+
+  methods: {/*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
+    updateData() {
+      setInterval(this.created, 2500);
     },
-    
-   
-    deconnecter() {
-     this.token= localStorage.removeItem("token");
-       this.$router.push("/selfSpace")
-       this.$router.push("/login");
-     
-      
-    },
+
+    deconnecter() {        
+      this.token = localStorage.removeItem("token");  /*Nous retirons le token du LocalStorage*/
+      this.$router.push("/login");                     /*Nous redirigeons vers la page login*/
+    }, 
     created() {
-      const id = this.token.userId;
+      const id = this.token.userId;                   /*Récupération de l'id de l'user qui est dans le LocalStorage*/
       axios
         .get(`http://localhost:3000/api/user/${id}`, {
           headers: {
             Authorization: "Bearer " + this.token.token,
           },
         })
-        .then((response) => (this.photos = response.data));
+        .then((response) => (this.Users = response.data));
     },
   },
-  guardar() {
+  guardar() {       /*Nous redirigeons vers la page Modify*/      
     this.$router.push("/ModifyUser");
   },
 };
@@ -356,6 +349,6 @@ img {
 b {
   font-weight: bolder;
   font-size: 18px;
-  color: white;  
+  color: white;
 }
 </style>

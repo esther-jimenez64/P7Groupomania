@@ -15,43 +15,33 @@
         href="https://bootswatch.com/4/lumen/bootstrap.min.css"
       />
     </head>
-   
-    
-       <HelloWorld> </HelloWorld>
-       <router-view />
+  <!--Premier composant, point d'entrée de vue-->
+    <HelloWorld> </HelloWorld>
+    <router-view /> <!--router-view affichera le composant qui correspond à l'url.-->
   </div>
- 
-
 </template>
 
-<script>
+<script> /*import du composants accueil*/
 import HelloWorld from "../components/HelloWorld.vue";
-export default {
-   components: {
- HelloWorld
+export default { /*Import d'axios pour effectuer mes requêtes http*/ /*importer un SFC comme un module*/
+  components: {
+    HelloWorld,
   },
-  data: function () {
-
+  data: function () { /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
-      email: "",
-      password: "",
-      photos: [],
       token: JSON.parse(localStorage.getItem("token")),
-  components: {},
-  test:false
+      components: {},
     };
   },
   methods: {
-     updateData() {
+    updateData() {
       setInterval(this.created, 2500);
     },
-    veremos(){
-      this.token = JSON.parse(localStorage.getItem("token"))
-    }
+    veremos() {
+      this.token = JSON.parse(localStorage.getItem("token")); /*Récupération du token présent dans le local storage*/
+    },
   },
-}
-
- 
+};
 </script>
 
 <style>
@@ -168,7 +158,7 @@ nav {
 nav ul {
   margin: 0;
   padding: 0;
-   margin-top: 15px;
+  margin-top: 15px;
   list-style: none;
 }
 
@@ -232,7 +222,6 @@ nav a:hover {
 
   nav ul {
     display: flex;
-   
   }
 
   nav li {
