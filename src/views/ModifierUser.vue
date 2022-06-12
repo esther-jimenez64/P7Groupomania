@@ -1,8 +1,11 @@
 <template>
   <div id="test">
+   <HelloWorld> </HelloWorld>
     <link rel="icon" href="icon.ico" />
     <div class="card">
       <img
+        loading="lazy"
+				alt="photo d'une figure humaine représentant une photo de profils qui se deconnecte"
         class="profile-img"
         src="https://cdn-icons-png.flaticon.com/512/6568/6568636.png"
       />
@@ -39,11 +42,20 @@
       </form>
     </div>
   </div>
+      <footer>
+  <HelloFooter> </HelloFooter>  
+  </footer>
 </template>
 
 <script>
+import HelloFooter from "../components/HelloFooter.vue";
+import HelloWorld from "../components/HelloWorld.vue";
 import axios from "axios";                   /*Import d'axios pour effectuer mes requêtes http*/ /*importer un SFC comme un module*/
 export default {                              /*définir les événements à  émettre vers son parent*/
+  components: {
+    HelloWorld,
+    HelloFooter
+  },
   emit: ["users"],                             /*définir les événements à  émettre vers son parent*/
   data() {                                   /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
@@ -71,8 +83,9 @@ export default {                              /*définir les événements à  é
             Authorization: "Bearer " + this.token.token,
           },
         })
-        .then((response) => {
-          console.log(response.data);
+        .then((res) => {
+          localStorage.removeItem("token");/*Nous retirons le token du LocalStorage*/
+          localStorage.setItem("token", JSON.stringify(res.data));/*on crée l'item token en lui passe les données de la res 200 token username userId*/
           this.$router.push("/selfSpace");    /*Nous redirigeons vers la page espace personnel*/
         });
     },
@@ -306,6 +319,7 @@ html {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   letter-spacing: 1px;
   text-align: center;
+  margin-bottom: 50px;
 }
 
 input {

@@ -30,7 +30,6 @@ import axios from "axios";  /*Import d'axios pour effectuer mes requêtes http*/
 export default {
   emit: ["newPost"],/*définir les événements à  émettre vers son parent*/
   props: ["publicationn", "commentt"],/*passer des données de notre composant vers un autre composant*/
-
   data: function () { /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
       content: "",/*donnée réactif du v-model*/

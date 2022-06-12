@@ -1,8 +1,12 @@
 <template>
+  <HelloWorld> </HelloWorld>
   <div id="test">
     <link rel="icon" href="icon.ico" />
-    <div class="card" @click="deconnecter"> <!--écoute du clic  en passant une function -->
+    <div class="card" @click="deconnecter">
+      <!--écoute du clic  en passant une function -->
       <img
+        loading="lazy"
+        alt="photo d'une figure humaine représentant une photo de profils"
         class="profile-img"
         src="https://cdn-icons-png.flaticon.com/512/6568/6568636.png"
       />
@@ -13,24 +17,27 @@
 
     <div class="login">
       <h1>Vos informations</h1>
-      <form method="post"><!--placeHolder dynamique avec v-blind lier un attribut HTML à une expression JavaScript. qui contient l' username dans les données data-->
+      <form method="post">
+        <!--placeHolder dynamique avec v-blind lier un attribut HTML à une expression JavaScript. qui contient l' username dans les données data-->
         <input
           v-model="username"
           :placeholder="[[this.Users.username]]"
           type="text"
           name="u"
-        />  <!--v-model username pour la liaison d'entrée de formulaire  bidirectionnelle. -->
+        />
+        <!--v-model username pour la liaison d'entrée de formulaire  bidirectionnelle. -->
         <input
           v-model="email"
           type="email"
           :placeholder="[[Users.email]]"
           name="p"
-        />  <!--v-model email pour la liaison d'entrée de formulaire  bidirectionnelle. -->
+        />
+        <!--v-model email pour la liaison d'entrée de formulaire  bidirectionnelle. -->
         <router-link
           class="btn btn-primary btn-block btn-large"
           to="/ModifyUser"
         >
-          Modifier</router-link 
+          Modifier</router-link
         ><!--link vers views modify-->
         <router-link
           class="btn btn-primary btn-block btn-large"
@@ -41,17 +48,30 @@
       </form>
     </div>
   </div>
+  <footer>
+  <HelloFooter> </HelloFooter>  
+  </footer>
+
 </template>
 <script>
-import axios from "axios";   /*Import d'axios pour effectuer mes requêtes http*/ /*importer un SFC comme un module*/
-export default {            /*définir les événements à  émettre vers son parent*/
-  data() {                    /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
+import HelloFooter from "../components/HelloFooter.vue";
+import HelloWorld from "../components/HelloWorld.vue";
+import axios from "axios"; /*Import d'axios pour effectuer mes requêtes http*/ /*importer un SFC comme un module*/
+export default {
+  components: {
+    HelloWorld,
+    HelloFooter
+  } /*définir les événements à  émettre vers son parent*/,
+  data() {
+    /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
-      post: "",                /*donnée réactif du v-model*/
+      post: "" /*donnée réactif du v-model*/,
       email: "",
       password: "",
       username: "",
-      token: JSON.parse(localStorage.getItem("token")),       /*Récupération du token présent dans le local storage*/
+      token: JSON.parse(
+        localStorage.getItem("token")
+      ) /*Récupération du token présent dans le local storage*/,
       Users: [],
     };
   },
@@ -60,17 +80,23 @@ export default {            /*définir les événements à  émettre vers son pa
     this.updateData();
   },
 
-  methods: {/*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
+  methods: {
+    /*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
     updateData() {
       setInterval(this.created, 2500);
     },
 
-    deconnecter() {        
-      this.token = localStorage.removeItem("token");  /*Nous retirons le token du LocalStorage*/
-      this.$router.push("/login");                     /*Nous redirigeons vers la page login*/
-    }, 
+    deconnecter() {
+      this.token =
+        localStorage.removeItem(
+          "token"
+        ); /*Nous retirons le token du LocalStorage*/
+      this.$router.push("/login"); /*Nous redirigeons vers la page login*/
+    },
     created() {
-      const id = this.token.userId;                   /*Récupération de l'id de l'user qui est dans le LocalStorage*/
+      const id =
+        this.token
+          .userId; /*Récupération de l'id de l'user qui est dans le LocalStorage*/
       axios
         .get(`http://localhost:3000/api/user/${id}`, {
           headers: {
@@ -80,7 +106,8 @@ export default {            /*définir les événements à  émettre vers son pa
         .then((response) => (this.Users = response.data));
     },
   },
-  guardar() {       /*Nous redirigeons vers la page Modify*/      
+  guardar() {
+    /*Nous redirigeons vers la page Modify*/
     this.$router.push("/ModifyUser");
   },
 };
@@ -308,11 +335,12 @@ html {
   width: 300px;
   height: 300px;
 }
-.login h1 {
-  color: #fff;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  letter-spacing: 1px;
-  text-align: center;
+.login h1[data-v-4795bea4] {
+    color: #fff;
+    text-shadow: 0 0 10px rgb(0 0 0 / 30%);
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 50px;
 }
 
 input {

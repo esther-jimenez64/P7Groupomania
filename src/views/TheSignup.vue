@@ -1,9 +1,11 @@
 <template>
+  <HelloWorld> </HelloWorld>
   <div id="test">
     <head>
       <title>Your Title here</title>
       <link
         rel="stylesheet"
+        type="text/css"
         href="https://bootswatch.com/4/lumen/bootstrap.min.css"
       />
     </head>
@@ -17,9 +19,10 @@
           <h1 class="text-center login-title"></h1>
           <div class="account-wall">
             <img
+              loading="lazy"
+              alt="photo du logo groupomania"
               class="profile-img"
               src="../assets/icon-above-font.png "
-              alt=""
             />
             <form class="form-signin">
               <input
@@ -50,12 +53,13 @@
                 @click.prevent="sendPost()"
                 class="btn btn-lg btn-primary btn-block sign-in"
                 type="submit"
-              ><!--écoute du clic du bouton en passant une function -->
+              >
+                <!--écoute du clic du bouton en passant une function -->
                 <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
                 Sign in
               </button>
-              <router-link class="pull-right need-help" to="/login" 
-                >Déjà Inscrit ? Connecter vous</router-link 
+              <router-link class="pull-right need-help" to="/login"
+                >Déjà Inscrit ? Connecter vous</router-link
               ><!--link vers views-->
               <router-view /><!--router-view affichera le composant qui correspond à l'url.-->
               >
@@ -63,21 +67,34 @@
           </div>
         </div>
       </div>
+       
     </body>
+    <footer class="foot">
+             <HelloFooter> </HelloFooter>  
+             </footer>
   </div>
 </template>
 
 <script>
-import axios from "axios";  /*Import d'axios pour effectuer mes requêtes http*/
-export default {           /*importer un SFC comme un module*/
-  data: function () {     /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
+import HelloFooter from "../components/HelloFooter.vue";
+import HelloWorld from "../components/HelloWorld.vue";
+import axios from "axios"; /*Import d'axios pour effectuer mes requêtes http*/
+export default {
+  /*importer un SFC comme un module*/
+  components: {
+    HelloWorld,
+    HelloFooter
+  },
+  data: function () {
+    /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
-      username: "",          /*donnée réactif du v-model*/
+      username: "" /*donnée réactif du v-model*/,
       email: "",
       password: "",
     };
   },
-  methods: {/*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
+  methods: {
+    /*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
     sendPost() {
       if (this.email.length < 5) {
         //Condition si le mail est trop court non//
@@ -107,8 +124,8 @@ export default {           /*importer un SFC comme un module*/
           "Votre Mots de pass dois contenir au moins 1 caractère spéciaux une majuscule et un chiffre"
         );
       }
-      const postData = {  /*objet avec les value */
-        username: this.username,
+      const postData = {
+        /*objet avec les value */ username: this.username,
         email: this.email,
         password: this.password,
       };
@@ -120,12 +137,25 @@ export default {           /*importer un SFC comme un module*/
 };
 </script>
 <style scoped>
+footer.foot {
+    position: absolute;
+    bottom: -180px;
+    display:block;
+    z-index:999;
+}
+footer{
+  display:block;
+}
 #test a[data-v-092dea1e] {
+  font-weight: bold;
+  color: #fd2d01;
+}
+#test a {
   font-weight: bold;
   color: #fd2d01 !important;
 }
 .a.pull.right.need-help {
-  color: red;
+  color: #fd2d01;
 }
 .btn-primary {
   background-color: white;
@@ -157,34 +187,35 @@ export default {           /*importer un SFC comme un module*/
   background-size: cover;
   position: absolute;
   left: 0px;
-  top: 7px;
+  bottom: -49.8px;
   width: 100%;
   height: 100%;
 
   background-color: orange;
 }
 
-.innerRightBlurred {
-  position: fixed;
-  opacity: 0.8;
-  background-color: #202020;
-  left: auto;
-  width: 330px;
-  top: 10px;
-  bottom: 0;
-  right: 0;
+.innerRightBlurred[data-v-d2e720c2][data-v-d2e720c2] {
+    position: absolute;
+    opacity: 0.8;
+    background-color: #202020;
+    left: auto;
+    width: 330px;
+    bottom: 0;
+    top: 93px;
+    right: 0;
+    height: 635px;
 }
 
-.innerRight {
-  position: fixed;
-  left: auto;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  color: #707070;
+.innerRight[data-v-d2e720c2] {
+    position: absolute;
+    left: auto;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    color: #707070;
 }
 .innerLeft {
-  position: fixed;
+  position: absolute;
   opacity: 1;
   left: auto;
   top: 0;
@@ -246,12 +277,12 @@ export default {           /*importer un SFC comme un module*/
   border-top-right-radius: 0;
   width: 250px;
 }
-.account-wall {
-  margin-top: auto;
-  margin-right: 10px;
-  padding-left: 200px;
-  padding: 20px;
-  margin-top: 100px;
+.account-wall[data-v-d2e720c2] {
+    margin-top: auto;
+    margin-right: 10px;
+    padding-left: 200px;
+    padding: 20px;
+    margin-top: 138px;
 }
 .login-title {
   color: #555;
@@ -276,5 +307,16 @@ export default {           /*importer un SFC comme un module*/
 }
 .sign-in {
   margin-bottom: 20px;
+}
+.innerRightBlurred[data-v-d2e720c2] {
+    position: absolute;
+    opacity: 0.8;
+    background-color: #202020;
+    left: auto;
+    width: 330px;
+    top: 10px;
+    bottom: 0;
+    right: 0;
+    height: 673px;
 }
 </style>

@@ -16,6 +16,7 @@
   <header>
     <h1>Groupomania</h1>
     <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+     <label for="nav-toggle" class="acessNav">"bouton pour afficher le menu navigation phone"</label>      
     <nav>
       <ul>
         <li>
@@ -71,10 +72,17 @@ h1 header {
   align-items: flex-end;
   margin-left: -100px;
   font-family: "Lato", bold;
+  margin-top:15px;
 }
 h1 {
   color: #fd2d01;
   font-family: "Lato", bold;
+}
+.h1, h1 {
+    font-size: 2.1875rem;
+    position: relative;
+    top: 35px;
+    right: 10px;
 }
 :root {
   --background: rgba(0, 214, 170, 0.85);
@@ -103,7 +111,7 @@ header {
   background: white;
   text-align: center;
   position: relative;
-  top: 1px;
+  bottom: 25px;
   right: 1px;
   z-index: 999;
   width: 100%;
@@ -114,23 +122,25 @@ header {
   top: -9999px !important;
   left: -9999px !important;
 }
-
+  
 .nav-toggle:focus ~ .nav-toggle-label {
   outline: 3px solid rgba(lightblue, 0.75);
 }
-
+.acessNav{
+ color: white;
+}
 .nav-toggle-label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin-left: em;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  background-color: #fd2d01;
-  width: 44px;
-  margin-right: 15px;
-  padding-left: 7px;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    margin-left: em;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background-color: #fd2d01;
+    width: 44px;
+    margin-right: 15px;
+    padding-left: 7px;
 }
 
 .nav-toggle-label span,

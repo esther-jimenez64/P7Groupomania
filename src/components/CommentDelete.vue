@@ -1,4 +1,5 @@
 <template>
+<HelloWorld> </HelloWorld>
   <!--écoute du clic sur le bouton en retirant l'event default et le remplacant par la methode guardar-->
   <div>
     <button

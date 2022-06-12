@@ -3,8 +3,9 @@
     <div class="widget-post" aria-labelledby="post-header-title">
       <div class="center">
         <img
+        loading="lazy"
+				alt="photo d'une figure humaine gris représentant une photo de profils"
           src="https://tse1.mm.bing.net/th?id=OIP.etoPZN5PSRA0lJXcXCm_KAHaHa&amp;pid=Api&amp;rs=1&amp;c=1&amp;qlt=95&amp;w=123&amp;h=123"
-          alt="..."
           class="chex"
         /><span>{{ this.token.username }}</span> <!--afectation de l'username-->
       </div>
@@ -61,9 +62,13 @@
 </template>
 
 <script>
+
 import axios from "axios";/*Import d'axios pour effectuer mes requêtes http*/ /*importer un SFC comme un module*/
 export default {
   emit: ["newPost"],  /*définir les événements à  émettre vers son parent*/
+    components: {
+
+  },
   data: function () {   /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
       title: "", /*donnée réactif du v-model*/

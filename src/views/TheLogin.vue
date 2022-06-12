@@ -1,9 +1,13 @@
 <template>
+<div class="move">
+ <HelloWorld> </HelloWorld>
+ </div>
   <div id="test">
     <head>
       <title>Your Title here</title>
       <link
         rel="stylesheet"
+        type="text/css"
         href="https://bootswatch.com/4/lumen/bootstrap.min.css"
       />
     </head>
@@ -17,9 +21,10 @@
           <h1 class="text-center login-title"></h1>
           <div class="account-wall">
             <img
+              loading="lazy"
+              alt="photo du logo groupomania"
               class="profile-img"
               src="../assets/icon-above-font.png "
-              alt=""
             />
             <form class="form-signin">
               <input
@@ -39,53 +44,82 @@
                 minlength="8"
                 required
               /><!--V-model password pour la liaison d'entrée de formulaire bidirectionnelle-->
-              <button 
+              <button
                 @click.prevent="sendPost()"
                 class="btn btn-lg btn-primary btn-block sign-in"
                 type="submit"
-              ><!--écoute du clic du bouton en passant une function -->
+              >
+                <!--écoute du clic du bouton en passant une function -->
                 <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
                 Login
               </button>
-              <router-link class="pull-right need-help" to="/signup"><!--link vers views-->
+              <router-link class="pull-right need-help" to="/signup"
+                ><!--link vers views-->
                 Pas de compte ? Inscrivez vous</router-link
               ><router-view /><!--router-view affichera le composant qui correspond à l'url.-->
             </form>
           </div>
         </div>
+
       </div>
+      
     </body>
+    
   </div>
+<footer class="foot">
+             <HelloFooter> </HelloFooter>  
+             </footer>
+  
+
 </template>
 
 <script>
+import HelloFooter from "../components/HelloFooter.vue";
 import axios from "axios"; /*Import d'axios pour effectuer mes requêtes http*/
-export default {  /*importer un SFC comme un module*/
-  data: function () {        /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
+import HelloWorld from "../components/HelloWorld.vue";
+export default {
+  /*importer un SFC comme un module*/
+  components: {
+    HelloWorld,
+    HelloFooter
+  },
+  data: function () {
+    /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
-      email: "",            /*donnée réactif du v-model*/
+      email: "" /*donnée réactif du v-model*/,
       password: "",
-      token: JSON.parse(localStorage.getItem("token")),   /*Récupération du token présent dans le local storage*/
+      token: JSON.parse(
+        localStorage.getItem("token")
+      ) /*Récupération du token présent dans le local storage*/,
     };
   },
-  methods: {/*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
-    goToPost() {/*fontion qui redirige vers le view posts*/
+  methods: {
+    /*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
+    goToPost() {
+      /*fontion qui redirige vers le view posts*/
       this.$router.push("/posts");
     },
-    mounted() {   /*lors du cycle de vie vu mounted en récupère le toke du LS*/
+    mounted() {
+      /*lors du cycle de vie vu mounted en récupère le toke du LS*/
       this.token = JSON.parse(localStorage.getItem("token"));
     },
-    sendPost() {  /*Fonction qui post qui envois l'user à la database*/
-      const postData = {  /*objet avec les value */
-        email: this.email,
+    sendPost() {
+      /*Fonction qui post qui envois l'user à la database*/
+      const postData = {
+        /*objet avec les value */ email: this.email,
         password: this.password,
       };
       axios
         .post("http://localhost:3000/api/user/login", postData)
         .then((res) => {
-   localStorage.setItem("token", JSON.stringify(res.data));/*on crée l'item token en lui passe les données de la res 200 token username userId*/
-          this.token = JSON.parse(localStorage.getItem("token")); /*Ensuite, nous le récupérons*/
-          this.goToPost();                                       /* redirige vers le view posts*/
+          localStorage.setItem(
+            "token",
+            JSON.stringify(res.data)
+          ); /*on crée l'item token en lui passe les données de la res 200 token username userId*/
+          this.token = JSON.parse(
+            localStorage.getItem("token")
+          ); /*Ensuite, nous le récupérons*/
+          this.goToPost(); /* redirige vers le view posts*/
         })
         .catch((res) => {
           /*erreur possible et alert*/
@@ -96,9 +130,15 @@ export default {  /*importer un SFC comme un module*/
   },
 };
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.move.nav{
+position:relative;left:10px;
+}
+footer.foot {
+    position: absolute;
+    bottom: -175px;
+}
 #test a[data-v-092dea1e] {
   font-weight: bold;
   color: #fd2d01 !important;
@@ -126,35 +166,31 @@ export default {  /*importer un SFC comme un module*/
   color: #42b983;
 }
 
-.fullDiv {
-  background: url("https://www.renovationettravaux.fr/wp-content/uploads/2019/01/Prix-d%E2%80%99am%C3%A9nagement-de-bureau-professionnel.jpg")
-    no-repeat;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  position: absolute;
-  left: 0px;
-  top: 7px;
-  width: 100%;
-  height: 100%;
-
-  background-color: orange;
+.fullDiv[data-v-c168189c] {
+    background: url(https://www.renovationettravaux.fr/wp-content/uploads/2019/01/Prix-d%E2%80%99am%C3%A9nagement-de-bureau-professionnel.jpg) no-repeat;
+    background-size: cover;
+    position: absolute;
+    left: 0px;
+    bottom: -90.8px;
+    width: 100%;
+    height: 100%;
+    background-color: orange;
 }
 
-.innerRightBlurred {
-  position: fixed;
-  opacity: 0.8;
-  background-color: #202020;
-  left: auto;
-  width: 330px;
-  top: 10px;
-  bottom: 0;
-  right: 0;
-}
 
+.innerRightBlurred[data-v-c168189c][data-v-c168189c] {
+    position: absolute;
+    opacity: 0.8;
+    background-color: #202020;
+    left: auto;
+    width: 335px;
+    top: 92px;
+    bottom: 0;
+    right: 0;
+    height: 631px;
+}
 .innerRight {
-  position: fixed;
+  position: absolute;
   left: auto;
   top: 0;
   bottom: 0;
@@ -229,7 +265,7 @@ export default {  /*importer un SFC comme un module*/
   margin-right: 10px;
   padding-left: 200px;
   padding: 20px;
-  margin-top: 100px;
+  margin-top: 150px;
 }
 .login-title {
   color: #555;

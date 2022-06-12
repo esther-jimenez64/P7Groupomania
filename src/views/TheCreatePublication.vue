@@ -1,4 +1,5 @@
 <template>
+  <HelloWorld> </HelloWorld>
   <div class="hello">
     <div class="container"></div>
   </div>
@@ -14,11 +15,12 @@
           <h1>Dernière publication</h1>
           <!--déclaration du composant-->
           <ThePublication /><!-- parcourir une liste d'éléments et l'afficher dans VueJS avec une boucle for.-->
-          <div  
+          <div
             v-for="publication in publications"
-            :key="publication.id" 
+            :key="publication.id"
             class="post-content"
-          ><!--key index de chaque publication-->
+          >
+            <!--key index de chaque publication-->
             <link
               href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
               rel="stylesheet"
@@ -30,20 +32,24 @@
                   <div class="blog-card blog-card-blog">
                     <a href="#">
                       <img
+                        loading="lazy"
+                        alt="photo d'une figure humaine gris représentant une photo de profils"
                         src="https://tse1.mm.bing.net/th?id=OIP.etoPZN5PSRA0lJXcXCm_KAHaHa&pid=Api&rs=1&c=1&qlt=95&w=123&h=123"
-                        alt="..."
                         class="userImg"
                       />
                     </a>
-                    <ThePublicationDelete :publicationn="publication" /><!--envois props les posts récuperer de la database-->
+                    <ThePublicationDelete
+                      :publicationn="publication"
+                    /><!--envois props les posts récuperer de la database-->
                     <!--rendu conditionnel si commentair vaut true-->
                     <button
-                      v-if="commentair" 
+                      v-if="commentair"
                       @click="this.showoffInputPostMody()"
                       type="button"
                       class="btn btn-modifyPost"
                       data-v-5ce821ab=""
-                    ><!--écoute du clic en passant une function -->
+                    >
+                      <!--écoute du clic en passant une function -->
                       <label class="post-actionsModify" data-v-5ce821ab=""
                         ><i
                           class="fa fa-pencil-square-o"
@@ -53,14 +59,15 @@
                         Modify
                       </label>
                     </button>
-                     <!--rendu conditionnel si commentair vaut false-->
+                    <!--rendu conditionnel si commentair vaut false-->
                     <button
                       v-else
                       @click="this.showInputPostModify(publication.id)"
                       type="button"
                       class="btn btn-modifyPost"
                       data-v-5ce821ab=""
-                    ><!--Écoute du clic en passant une function en passant en paramètre l'id du post -->
+                    >
+                      <!--Écoute du clic en passant une function en passant en paramètre l'id du post -->
                       <label class="post-actionsModify" data-v-5ce821ab="">
                         <i
                           class="fa fa-pencil-square-o"
@@ -70,9 +77,10 @@
                         Modify
                       </label>
                     </button>
-                    <span class="userName">{{ this.token.username }}</span><!--récupèration de l'username de data-->
-                     <!--Rendu conditionnel si commentaire et edit.. id et la même que c'elle de publication.id -->
-                     <!-- l'affichage de l'input se fait si la variable contient le même id que celui du post ciblé-->
+                    <span class="userName">{{ this.token.username }}</span
+                    ><!--récupèration de l'username de data-->
+                    <!--Rendu conditionnel si commentaire et edit.. id et la même que c'elle de publication.id -->
+                    <!-- l'affichage de l'input se fait si la variable contient le même id que celui du post ciblé-->
                     <ThePublicationModify
                       v-if="commentair && editPostId == publication.id"
                       :publicationn="publication"
@@ -81,13 +89,15 @@
                     <div class="blog-card-image">
                       <a href="#">
                         <img
+                          loading="lazy"
                           v-if="publication.image"
                           class="img"
                           :src="publication.image"
-                          :alt="publication.title" /><img
+                          alt="une image publier par les users" /><img
                           v-else
-                          src="https://tse1.mm.bing.net/th?id=OIP.XXWKhZZeWjrUPx-ZSfP0GAHaDt&pid=Api&P=0&w=332&h=166"
-                      /></a><!--placeHolder dynamique avec v-blind lier un attribut HTML à une expression JavaScript. qui contient l'image qui est données data-->
+                          alt="une image"
+                          src="https://tse1.mm.bing.net/th?id=OIP.XXWKhZZeWjrUPx-ZSfP0GAHaDt&pid=Api&P=0&w=332&h=166" /></a
+                      ><!--placeHolder dynamique avec v-blind lier un attribut HTML à une expression JavaScript. qui contient l'image qui est données data-->
                       <div class="ripple-cont"></div>
                     </div>
 
@@ -101,8 +111,9 @@
                         />
                       </svg>
                       {{ this.convertDate(publication.updatedAt) }}
-                    </div><!--date de publication du post contenu dans la database-->
-                   <!--Rendu conditionnel si le post contient des commentaire l'affichage du bouton se fait -->
+                    </div>
+                    <!--date de publication du post contenu dans la database-->
+                    <!--Rendu conditionnel si le post contient des commentaire l'affichage du bouton se fait -->
                     <div class="blog-table">
                       <button
                         v-if="publication.Comments.length > 0"
@@ -110,7 +121,8 @@
                         type="button"
                         class="btn btn-d"
                         data-v-5ce821ab=""
-                      ><!--Écoute du clic en passant une function en passant en paramètre l'id du post -->
+                      >
+                        <!--Écoute du clic en passant une function en passant en paramètre l'id du post -->
                         <label class="post-actionsModify" data-v-5ce821ab="">
                           <i
                             class="fa fa-comments"
@@ -120,13 +132,14 @@
                           Afficher
                         </label>
                       </button>
-                     <!-- boucle parcourir une liste d'éléments et l'afficher dans VueJS. les commentaire--> 
+                      <!-- boucle parcourir une liste d'éléments et l'afficher dans VueJS. les commentaire-->
                       <div
                         v-for="commentaire in publication.Comments"
                         :key="commentaire.id"
                         class="post-comment"
-                      ><!--key index de chaque commentaire-->
-  <!--Rendu conditionnel si test == true et que le postId correspond à celui sur lequel on clique alors ça affiche les commentaires -->
+                      >
+                        <!--key index de chaque commentaire-->
+                        <!--Rendu conditionnel si test == true et que le postId correspond à celui sur lequel on clique alors ça affiche les commentaires -->
                         <div v-if="test && commentPostId == publication.id">
                           <div class="card mb-2">
                             <div class="card-body p-2 p-sm-3">
@@ -136,10 +149,11 @@
                                   data-toggle="collapse"
                                   data-target=".forum-content"
                                   ><img
+                                    loading="lazy"
+                                    alt="photo d'une figure humaine  représentant une photo de profils"
                                     src="https://bootdey.com/img/Content/avatar/avatar2.png"
                                     class="mr-3 rounded-circle"
                                     width="50"
-                                    alt="User"
                                 /></a>
                                 <div class="media-body">
                                   <h6>
@@ -153,7 +167,8 @@
                                   </h6>
                                   <p class="text-secondary">
                                     {{ commentaire.content }}
-                                  </p><!--récupèration du content du comment avec le v-for-->
+                                  </p>
+                                  <!--récupèration du content du comment avec le v-for-->
                                   <div class="dateComment">
                                     <svg
                                       xmlns="http://www.w3.org/2000/svg"
@@ -166,15 +181,17 @@
                                     {{
                                       this.convertDate(commentaire.updatedAt)
                                     }}
-                                  </div><!--Fonction qui converti la date et extrait seulement ce qu'il faut-->
-                                  <!--Rendu conditionnel si coment == true -->                                  
+                                  </div>
+                                  <!--Fonction qui converti la date et extrait seulement ce qu'il faut-->
+                                  <!--Rendu conditionnel si coment == true -->
                                   <button
                                     v-if="coment"
                                     @click="this.offCommentModify()"
                                     type="button"
                                     class="btn btn-modifyComment"
                                     data-v-5ce821ab=""
-                                  ><!--Écoute du clic en passant une function-->
+                                  >
+                                    <!--Écoute du clic en passant une function-->
                                     <label
                                       class="post-actionsModify"
                                       data-v-5ce821ab=""
@@ -186,14 +203,17 @@
                                       Modify
                                     </label>
                                   </button>
-                                <!--Rendu conditionnel si coment == false -->     
+                                  <!--Rendu conditionnel si coment == false -->
                                   <button
                                     v-else
-                                    @click="this.showCommentModify(commentaire.id)"
+                                    @click="
+                                      this.showCommentModify(commentaire.id)
+                                    "
                                     type="button"
                                     class="btn btn-modifyComment"
                                     data-v-5ce821ab=""
-                                  ><!--Écoute du clic en passant une function en passant l'id du comment en paramètre-->
+                                  >
+                                    <!--Écoute du clic en passant une function en passant l'id du comment en paramètre-->
                                     <label
                                       class="post-actionsModify"
                                       data-v-5ce821ab=""
@@ -205,18 +225,19 @@
                                       Modify
                                     </label>
                                   </button>
-                      <!--déclaration du composant -->
+                                  <!--déclaration du composant -->
                                   <CommentDelete
                                     :publicationn="publication"
                                     :commentt="commentaire"
                                   />
-                       <!--déclaration du composant-->
-                       <!--Passage de l'id de la publication et du comment au composant modify-->
+                                  <!--déclaration du composant-->
+                                  <!--Passage de l'id de la publication et du comment au composant modify-->
                                   <CommentModify
                                     :publicationn="publication"
                                     :commentt="commentaire"
                                     v-if="coment && commentaire.id == commentId"
-                                  /> <!--Rendu conditionnel si coment et =True  et sue commentaire.id correspond à celui sur lequel on clique alors ça affiche les commentaires -->
+                                  />
+                                  <!--Rendu conditionnel si coment et =True  et sue commentaire.id correspond à celui sur lequel on clique alors ça affiche les commentaires -->
                                 </div>
                                 <div
                                   class="text-muted small text-center align-self-center"
@@ -228,18 +249,20 @@
                       </div>
                     </div>
 
-                    <h4 class="blog-card-caption">{{ publication.title }}</h4>
-                     <!--récupèration du title de la publication avec le v-for-->
+                    <h3 class="blog-card-caption">{{ publication.title }}</h3>
+                    <!--récupèration du title de la publication avec le v-for-->
                     <i class="far fa-newspaper"></i>
 
-                    <div> <!--récupèration du content de la publication avec le v-for-->
+                    <div>
+                      <!--récupèration du content de la publication avec le v-for-->
                       <p class="limit">{{ publication.content }}</p>
                       <div class="ftr">
                         <div class="author">
                           <a href="#">
                             <img
+                              loading="lazy"
+                              alt="photo d'une figure humaine  représentant une photo de profils"
                               src="https://tse1.mm.bing.net/th?id=OIP.etoPZN5PSRA0lJXcXCm_KAHaHa&pid=Api&rs=1&c=1&qlt=95&w=123&h=123"
-                              alt="..."
                               class="avatar img-raised"
                             />
                             <span>{{ this.token.username }}</span>
@@ -249,11 +272,14 @@
                                 @submit.prevent="save(publication.id)"
                                 class="form-inline"
                                 role="form"
-                              > <!--Écoute du clic en passant une function- en passant en paramètre l'id du post-->
+                              >
+                                <!--Écoute du clic en passant une function- en passant en paramètre l'id du post-->
 
-                              <!--Écoute du clic en passant une function-->
+                                <!--Écoute du clic en passant une function-->
                                 <input
-                                  @click.prevent="this.showComment(publication.id)"
+                                  @click.prevent="
+                                    this.showComment(publication.id)
+                                  "
                                   class="form-control"
                                   type="text"
                                   v-model="contentComment"
@@ -277,28 +303,43 @@
       </div>
     </div>
   </div>
+   <footer>
+  <HelloFooter> </HelloFooter>  
+  </footer>
 </template>
 <script>
+import HelloFooter from "../components/HelloFooter.vue";
 import axios from "axios"; /*Import d'axios pour effectuer mes requêtes http*/
-import CommentModify from "../components/CommentModify.vue";/*inmport des components*/
+import HelloWorld from "../components/HelloWorld.vue";
+import CommentModify from "../components/CommentModify.vue"; /*inmport des components*/
 import ThePublication from "../components/ThePublication.vue";
 import ThePublicationModify from "../components/ThePublicationModify.vue";
 import ThePublicationDelete from "../components/ThePublicationDelete.vue";
 import CommentDelete from "../components/CommentDelete.vue";
 
-export default {   /*importer un SFC comme un module*/
-  props: ["publicationn", "commentt"],  /*passer des données de notre composant vers un autre composant*/
+export default {
+  /*importer un SFC comme un module*/
+  props: [
+    "publicationn",
+    "commentt",
+  ] /*passer des données de notre composant vers un autre composant*/,
   components: {
     ThePublication,
     ThePublicationModify,
     ThePublicationDelete,
     CommentModify,
     CommentDelete,
+    HelloWorld,
+     HelloFooter
+    
   },
 
-  data: function () {                  /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
+  data: function () {
+    /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
-      token: JSON.parse(localStorage.getItem("token")),        /*Récupération du token présent dans le local storage*/
+      token: JSON.parse(
+        localStorage.getItem("token")
+      ) /*Récupération du token présent dans le local storage*/,
       publications: [],
       commentair: false,
       test: false,
@@ -307,7 +348,7 @@ export default {   /*importer un SFC comme un module*/
       editPostId: null,
       commentPostId: null,
       commentId: null,
-      contentComment:""
+      contentComment: "",
     };
   },
 
@@ -318,36 +359,45 @@ export default {   /*importer un SFC comme un module*/
     this.updateData();
   },
 
-  methods: {/*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
-    showCommentModify(id) {  /*Fonction qui écoute le clic et return comment true et affecte l'id du comment d'où le clic a été effectué, ainsi seul l'input pour  modifier de ce commentaire s'affichera */
+  methods: {
+    /*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
+    showCommentModify(id) {
+      /*Fonction qui écoute le clic et return comment true et affecte l'id du comment d'où le clic a été effectué, ainsi seul l'input pour  modifier de ce commentaire s'affichera */
       this.coment = true;
       this.commentId = id;
     },
-    
-    offCommentModify() {/*Fonction qui écoute le clic et return comment false ainsi fermer l'input modify */
+
+    offCommentModify() {
+      /*Fonction qui écoute le clic et return comment false ainsi fermer l'input modify */
       this.coment = false;
     },
 
-    showAllComments(postId) {/*Fonction qui écoute le clic et return test true et affecte l'id du post d'où le clic a été effectué, ainsi seul les comments de ce post s'affichera */
-      if (!this.test) {                      /*condition si test=false le bouton na pas reçu de clic*/
-        this.test = true;                   /*alors il passe a true au clic*/
-        this.commentPostId = postId;        /*on affecte l'id du post*/
-      } else { /*si test et true alors on masque les commentaires*/
-        this.test = false; 
-        this.commentPostId = null;    
+    showAllComments(postId) {
+      /*Fonction qui écoute le clic et return test true et affecte l'id du post d'où le clic a été effectué, ainsi seul les comments de ce post s'affichera */
+      if (!this.test) {
+        /*condition si test=false le bouton na pas reçu de clic*/
+        this.test = true; /*alors il passe a true au clic*/
+        this.commentPostId = postId; /*on affecte l'id du post*/
+      } else {
+        /*si test et true alors on masque les commentaires*/
+        this.test = false;
+        this.commentPostId = null;
       }
     },
 
-    showInputPostModify(postId) {/*Fonction qui écoute le clic et return comentair true et affecte l'id du post d'où le clic a été effectué, ainsi seul le form modify de ce post s'affichera */
+    showInputPostModify(postId) {
+      /*Fonction qui écoute le clic et return comentair true et affecte l'id du post d'où le clic a été effectué, ainsi seul le form modify de ce post s'affichera */
       this.commentair = true;
-      this.editPostId = postId;   /*on affecte l'id du post*/
+      this.editPostId = postId; /*on affecte l'id du post*/
     },
-    showoffInputPostMody() {/*Fonction qui écoute le clic et return comentair false et affecte l'id du post d'où le clic a été effectué, ainsi seul le form modify de ce post se masquera */
+    showoffInputPostMody() {
+      /*Fonction qui écoute le clic et return comentair false et affecte l'id du post d'où le clic a été effectué, ainsi seul le form modify de ce post se masquera */
       this.commentair = false;
       this.editPostId = null;
     },
 
-    convertDate(updatedAt) {/*fonction qui récupère la date de création et extrait uniquement les données nécessaires*/
+    convertDate(updatedAt) {
+      /*fonction qui récupère la date de création et extrait uniquement les données nécessaires*/
       let substring = updatedAt.substring(0, 10);
       let substring2 = updatedAt.substring(11, 19);
       return substring + "-" + substring2;
@@ -357,21 +407,26 @@ export default {   /*importer un SFC comme un module*/
       setInterval(this.created, 2500);
     },
 
-    created() { /*Fonction qui get all publications de la database*/
+    created() {
+      /*Fonction qui get all publications de la database*/
       const headers = {
         authorization: "Bearer " + this.token.token,
       };
       axios
 
         .get("http://localhost:3000/api/publication/post", { headers })
-        .then((response) => (this.publications = response.data)); /*Affecte-le résulta de la requête au tableau publications qui est dans la data réactive*/
+        .then(
+          (response) => (this.publications = response.data)
+        ); /*Affecte-le résulta de la requête au tableau publications qui est dans la data réactive*/
     },
 
-    save(id) {/*écoute le clic */
+    save(id) {
+      /*écoute le clic */
       console.log(id);
-      this.test = true;  /*affectant les data pour que lorsque on submit un nouveaux commentaire ils s'affiche*/
-     this.commentPostId =id; 
-      const formData = {  /*Le constructeur FormData qui est l'objet qui représente les données du formulaire HTML*/ 
+      this.test = true; /*affectant les data pour que lorsque on submit un nouveaux commentaire ils s'affiche*/
+      this.commentPostId = id;
+      const formData = {
+        /*Le constructeur FormData qui est l'objet qui représente les données du formulaire HTML*/
         content: this.contentComment,
         postId: this.id,
         username: this.token.username,
@@ -384,8 +439,8 @@ export default {   /*importer un SFC comme un module*/
           },
         })
         .then((response) => console.log(response));
-    this.contentComment="" /*on vide l'input après le submit*/
-      this.updateData();   
+      this.contentComment = ""; /*on vide l'input après le submit*/
+      this.updateData();
     },
   },
 };
@@ -499,7 +554,15 @@ export default {   /*importer un SFC comme un module*/
       0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
   }
 }
-
+button.btn.btn-delete {
+  color: black;
+}
+label.post-actionsModify {
+  color: black;
+}
+span {
+  color: black;
+}
 .datePost {
   position: relative;
   left: 15px;

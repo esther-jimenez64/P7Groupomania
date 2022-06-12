@@ -3,18 +3,21 @@
     <div class="widget-post" aria-labelledby="post-header-title">
       <div class="center">
         <img
+          loading="lazy"
+          alt="photo d'une figure humaine gris représentant une photo de profils"
           src="https://tse1.mm.bing.net/th?id=OIP.etoPZN5PSRA0lJXcXCm_KAHaHa&amp;pid=Api&amp;rs=1&amp;c=1&amp;qlt=95&amp;w=123&amp;h=123"
-          alt="..."
           class="chex"
         /><span>{{ this.token.username }}</span>
       </div>
       <div class="widget-post__header">
         <h2 class="widget-post__title" id="post-header-title">
-          <i class="fa fa-pencil" aria-hidden="true"></i><!--V-model title pour la liaison d'entrée du textarea à content bidirectionnelle-->
+          <i class="fa fa-pencil" aria-hidden="true"></i
+          ><!--V-model title pour la liaison d'entrée du textarea à content bidirectionnelle-->
           <input v-model="title" placeholder="Title" required />
         </h2>
-      </div><!--écoute du submit de l'input en passant une function -->
-      <form 
+      </div>
+      <!--écoute du submit de l'input en passant une function -->
+      <form
         id="widget-form"
         class="widget-post__form"
         @submit.prevent="guardar()"
@@ -22,9 +25,10 @@
         aria-label="post widget"
       >
         <div class="widget-post__content">
-          <label for="post-content" class="sr-only">share your moments</label><!--V-model title pour la liaison d'entrée du textarea à content bidirectionnelle-->
+          <label for="post-content" class="sr-only">share your moments</label
+          ><!--V-model title pour la liaison d'entrée du textarea à content bidirectionnelle-->
           <textarea
-            v-model="content"    
+            v-model="content"
             name="post"
             id="post-content"
             class="widget-post__textarea scroller"
@@ -42,8 +46,8 @@
               <label for="modify" class="post-actions__label">
                 <i class="fa fa-upload" aria-hidden="true"></i>
                 upload image
-              </label>
-            </button><!--Écoute du changement retirement de l'event default en affectant une function-->
+              </label></button
+            ><!--Écoute du changement retirement de l'event default en affectant une function-->
             <input
               type="file"
               id="modify"
@@ -61,39 +65,51 @@
 </template>
 
 <script>
-import axios from "axios";/*Import d'axios pour effectuer mes requêtes http*/ /*importer un SFC comme un module*/
+import axios from "axios"; /*Import d'axios pour effectuer mes requêtes http*/ /*importer un SFC comme un module*/
 export default {
-  emit: ["newPost"],                                      /*définir les événements à  émettre vers son parent*/
-  props: ["publicationn"],                               /*passer des données de notre composant vers un autre composant*/
-  data: function () {                                 /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
+  emit: ["newPost"] /*définir les événements à  émettre vers son parent*/,
+  props: [
+    "publicationn",
+  ] /*passer des données de notre composant vers un autre composant*/,
+  data: function () {
+    /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
-      title: "",   /*donnée réactif du v-model*/
+      title: "" /*donnée réactif du v-model*/,
       content: "",
       userId: "",
       file: "",
-      token: JSON.parse(localStorage.getItem("token")), /*Récupération du token présent dans le local storage*/
+      token: JSON.parse(
+        localStorage.getItem("token")
+      ) /*Récupération du token présent dans le local storage*/,
       selectedFile: null,
     };
   },
-  methods: {/*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
-    OneFileSelected(e) {/*récupération de l'image passer au event change*/
+  methods: {
+    /*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
+    OneFileSelected(e) {
+      /*récupération de l'image passer au event change*/
       this.file = e.target.files[0];
     },
-    guardar() {   /*Fonction qui écoute le clic et modifi le post en question grâce à l'id*/
-      const formData = new FormData();     /*Le constructeur FormData qui est l'objet qui représente les données du formulaire HTML*/ 
+    guardar() {
+      /*Fonction qui écoute le clic et modifi le post en question grâce à l'id*/
+      const formData =
+        new FormData(); /*Le constructeur FormData qui est l'objet qui représente les données du formulaire HTML*/
       {
-        if (this.file == null) { /*si il n'y a pas d'image*/
+        if (this.file == null) {
+          /*si il n'y a pas d'image*/
           formData.append("title", this.title);
           formData.append("content", this.content);
           formData.append("username", this.token.username);
-        } else { /*si il y a une image*/
+        } else {
+          /*si il y a une image*/
           formData.append("title", this.title);
           formData.append("content", this.content);
           formData.append("image", this.file);
           formData.append("username", this.token.username);
         }
       }
-      const id = this.publicationn.id; /*Récupération de l'id du post grâce au props*/
+      const id =
+        this.publicationn.id; /*Récupération de l'id du post grâce au props*/
       axios
         .put(`http://localhost:3000/api/publication/${id}`, formData, {
           headers: {

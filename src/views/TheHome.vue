@@ -1,13 +1,16 @@
 <template>
-  <html>
+ <div class="navMove">
+    <HelloWorld> </HelloWorld>
+    </div>
     <head>
+       <meta name="description" content="Web Social">
       <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
     <div id="test">
       <div class="bg"></div>
       <div class="blog-card spring-fever">
         <div class="title-content">
-          <h3><a href="#">Groupomania</a></h3>
+          <h2><a href="#">Groupomania</a></h2>
           <div class="intro"><a href="#">quesque?</a></div>
         </div>
         <div class="card-info">
@@ -23,8 +26,19 @@
         <div class="color-overlay"></div>
       </div>
     </div>
-  </html>
+       <footer>
+  <HelloFooter> </HelloFooter>  
+  </footer>
 </template>
+<script>
+import HelloFooter from "../components/HelloFooter.vue";
+import HelloWorld from "../components/HelloWorld.vue";
+ export default {  /*importer un SFC comme un module*/
+  components: {
+    HelloWorld,
+    HelloFooter
+  }};
+</script>
 
 <style scoped>
 #test {
@@ -34,9 +48,10 @@
 
 .bg {
   /* The image used */
-  background-image: url("https://jooinn.com/images/white-buiding-6.jpg");
+  background-image: url("../assets/homeGroupomania.webp");
   /* Full height */
   height: 100%;
+  width: 100%;
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
@@ -124,12 +139,12 @@ body {
   transition: all 0.6s;
 }
 
-.blog-card:hover h3:after {
+.blog-card:hover h2:after {
   animation: changeLetter 0.3s 1 linear;
   width: 80%;
 }
 
-.blog-card h3,
+.blog-card h2,
 h1 {
   font-size: 1.9em;
   font-weight: 400;
@@ -138,14 +153,14 @@ h1 {
   margin-bottom: 0;
   display: inline-block;
 }
-.blog-card h3 a {
+.blog-card h2 a {
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   transition: all 0.2s;
 }
-.blog-card h3 a:hover {
+.blog-card h2 a:hover {
   text-shadow: 0px 8px 20px rgba(0, 0, 0, 0.95);
 }
-h3:after {
+h2:after {
   content: " ";
   display: block;
   width: 10%;
