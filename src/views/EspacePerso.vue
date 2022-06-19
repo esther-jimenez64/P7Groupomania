@@ -2,7 +2,7 @@
   <HelloWorld> </HelloWorld>
   <div id="test">
     <link rel="icon" href="icon.ico" />
-    <div class="card" @click="deconnecter">
+    <button class="card" @click="deconnecter" tabindex="0">
       <!--écoute du clic  en passant une function -->
       <img
         loading="lazy"
@@ -13,13 +13,14 @@
       <div class="container">
         <h4><b>Déconnecter</b></h4>
       </div>
-    </div>
+    </button>
 
     <div class="login">
       <h1>Vos informations</h1>
       <form method="post">
         <!--placeHolder dynamique avec v-blind lier un attribut HTML à une expression JavaScript. qui contient l' username dans les données data-->
         <input
+          disabled="disabled"
           v-model="username"
           :placeholder="[[this.Users.username]]"
           type="text"
@@ -27,6 +28,7 @@
         />
         <!--v-model username pour la liaison d'entrée de formulaire  bidirectionnelle. -->
         <input
+          disabled="disabled"
           v-model="email"
           type="email"
           :placeholder="[[Users.email]]"
@@ -49,9 +51,8 @@
     </div>
   </div>
   <footer>
-  <HelloFooter> </HelloFooter>  
+    <HelloFooter> </HelloFooter>
   </footer>
-
 </template>
 <script>
 import HelloFooter from "../components/HelloFooter.vue";
@@ -60,7 +61,7 @@ import axios from "axios"; /*Import d'axios pour effectuer mes requêtes http*/ 
 export default {
   components: {
     HelloWorld,
-    HelloFooter
+    HelloFooter,
   } /*définir les événements à  émettre vers son parent*/,
   data() {
     /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
@@ -119,14 +120,13 @@ export default {
 }
 .card {
   /* Add shadows to create the "card" effect */
-  background: #158cba;
+  background: #222;
   width: 150px;
   height: 150px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   text-align: center;
-  /* margin-top: 150px; */
   position: relative;
   top: 15px;
   cursor: pointer;
@@ -191,6 +191,11 @@ export default {
 .btn.disabled,
 .btn[disabled] {
   background-color: #e6e6e6;
+}
+b[data-v-4795bea4] {
+  font-weight: bolder;
+  font-size: 17px;
+  color: white;
 }
 .btn-large {
   padding: 9px 14px;
@@ -329,18 +334,18 @@ html {
 }
 .login {
   position: absolute;
-  top: 60%;
+  top: 65%;
   left: 50%;
   margin: -150px 0 0 -150px;
   width: 300px;
   height: 300px;
 }
 .login h1[data-v-4795bea4] {
-    color: #fff;
-    text-shadow: 0 0 10px rgb(0 0 0 / 30%);
-    letter-spacing: 1px;
-    text-align: center;
-    margin-bottom: 50px;
+  color: #fff;
+  text-shadow: 0 0 10px rgb(0 0 0 / 30%);
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 50px;
 }
 
 input {
@@ -350,7 +355,7 @@ input {
   border: none;
   outline: none;
   padding: 10px;
-  font-size: 13px;
+  font-size: 15px;
   color: #fff;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(0, 0, 0, 0.3);
@@ -378,5 +383,15 @@ b {
   font-weight: bolder;
   font-size: 18px;
   color: white;
+}
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  display: block;
+  background: white;
+  height: 4px;
+  width: 2em;
+  border-radius: 2px;
+  position: relative;
 }
 </style>

@@ -6,7 +6,6 @@
 <script>
 import axios from "axios"; /*Import d'axios pour effectuer mes requêtes http*/ /*importer un SFC comme un module*/
 export default {
-  emit: ["newPost"],       /*définir les événements à  émettre vers son parent*/
   props: ["publicationn"], /*passer des données de notre composant vers un autre composant*/
   data: function () {      /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {     /*donnée réactif du v-model*/
@@ -24,7 +23,8 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data);
+          console.log(response);
+           this.$emit('PostSuprimmer','Post is delete');
         });
     },
   },

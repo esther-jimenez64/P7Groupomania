@@ -2,7 +2,7 @@
   <div id="test">
    <HelloWorld> </HelloWorld>
     <link rel="icon" href="icon.ico" />
-    <div class="card">
+    <button class="card" tabindex="0">
       <img
         loading="lazy"
 				alt="photo d'une figure humaine représentant une photo de profils qui se deconnecte"
@@ -12,7 +12,7 @@
       <div class="container">
         <h4><b>deconnecter</b></h4>
       </div>
-    </div>
+    </button>
 
     <div class="login">
       <h1>Vos informations</h1> <!--écoute du submit de l'input en passant une function -->
@@ -99,7 +99,7 @@ export default {                              /*définir les événements à  é
 }
 .card {
   /* Add shadows to create the "card" effect */
-  background: #158cba;
+  background: #222;
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -110,7 +110,11 @@ export default {                              /*définir les événements à  é
   position: relative;
   top: 15px;
 }
-
+b[data-v-57759f7c] {
+    font-weight: bolder;
+    font-size: 17px;
+    color: white;
+}
 /* On mouse-over, add a deeper shadow */
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
@@ -308,7 +312,7 @@ html {
 }
 .login {
   position: absolute;
-  top: 60%;
+  top:  70%;
   left: 50%;
   margin: -150px 0 0 -150px;
   width: 300px;
@@ -329,7 +333,7 @@ input {
   border: none;
   outline: none;
   padding: 10px;
-  font-size: 13px;
+  font-size: 15px;
   color: #fff;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(0, 0, 0, 0.3);

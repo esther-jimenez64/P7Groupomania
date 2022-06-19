@@ -118,6 +118,7 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
+          this.$emit('PostModifier',"publicationModifier");
         });
     },
   },
@@ -131,14 +132,12 @@ export default {
 .chex {
   width: 40px;
 }
-
 input {
   display: block;
   width: 580px;
   padding: 15px 0 15px 12px;
   font-weight: 400;
   border: none;
-  outline: none;
   color: blue;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 4px;
@@ -153,7 +152,6 @@ input:focus {
   box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.4),
     0 1px 1px rgba(255, 255, 255, 0.2);
 }
-
 * {
   box-sizing: border-box;
 }
@@ -161,50 +159,38 @@ body {
   padding: 0 1em;
   font-family: sans-serif;
 }
-
 /* * Post widget * */
-
 input[type="file"] {
   display: none;
 }
 ul {
   list-style-type: none;
 }
-
 .btn {
   padding: 0.5em 1em;
-
   background-color: transparent;
   color: #6b7270;
-
   border: none;
   cursor: pointer;
 }
-
 .widget-post {
   min-height: 100px;
   height: auto;
-
   border: 1px solid #eaeaea;
   border-radius: 6px;
   box-shadow: 0 1px 2px 1px rgba(130, 130, 130, 0.1);
-
   background-color: #fff;
-
   margin: auto;
   overflow: hidden;
 }
-
 .widget-post__header {
   padding: 0.2em 0.5em;
-
   background-color: #eaeaea;
   color: #3f5563;
 }
 .widget-post__title {
   font-size: 18px;
 }
-
 .widget-post__content {
   width: 100%;
   height: 50%;
@@ -213,30 +199,25 @@ ul {
   width: 100%;
   height: 100%;
   padding: 0.5em;
-
   border: none;
   resize: none;
 }
 .widget-post__textarea:focus {
-  outline: none;
-}
 
+}
 .widget-post__options {
   padding: 0.5em;
 }
 .widget-post___input {
   display: inline-block;
-
   width: 24%;
   padding: 0.2em 0.5em;
-
   border: 1px solid #eaeaea;
   border-radius: 1.5em;
 }
 .post-actions__label {
   cursor: pointer;
 }
-
 .widget-post__actions {
   width: 100%;
   padding: 0.5em;
@@ -244,7 +225,6 @@ ul {
 .post--actions {
   position: relative;
   padding: 0.5em;
-
   background-color: #f5f5f5;
   color: #a2a6a7;
 }
@@ -255,10 +235,8 @@ ul {
 .attachments--btn {
   background-color: #eaeaea;
   color: #007582;
-
   border-radius: 1.5em;
 }
-
 .post-actions__widget {
   display: inline-block;
   width: 38%;
@@ -266,37 +244,28 @@ ul {
 }
 .post-actions__publish {
   width: 120px;
-
   background-color: #008391;
   color: #fff;
-
   border-radius: 1.5em;
 }
-
 .scroller::-webkit-scrollbar {
   display: none;
 }
-
 .is--hidden {
   display: none;
 }
-
 /* * SR * */
 .sr-only {
   width: 1px;
   height: 1px;
-
   clip: rect(1px, 1px, 1px, 1px);
   -webkit-clip-path: inset(50%);
   clip-path: inset(50%);
-
   overflow: hidden;
   white-space: nowrap;
-
   position: absolute;
   top: 0;
 }
-
 /* *  Placeholder contrast * */
 ::-webkit-input-placeholder {
   color: #666;

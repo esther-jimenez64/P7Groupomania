@@ -1,7 +1,7 @@
 <template>
   <div>
     <form>
-      <!-- formulaire pour modify un post-->
+      <!-- formulaire pour modify un COMMENT-->
       <input
         class="test"
         :id="`input-comment-${publicationn.id}`"
@@ -28,7 +28,6 @@
 <script>
 import axios from "axios";  /*Import d'axios pour effectuer mes requêtes http*/ /*importer un SFC comme un module*/
 export default {
-  emit: ["newPost"],/*définir les événements à  émettre vers son parent*/
   props: ["publicationn", "commentt"],/*passer des données de notre composant vers un autre composant*/
   data: function () { /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
@@ -38,13 +37,11 @@ export default {
     };  
   },
   mounted() { 
-    this.updateData();
+   
   },
    
   methods: { /*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
-    updateData() {
-      setInterval(this.created, 2500);/*Répète la requête get all post toute les 2500 seconds pour récupérer la new valeur */
-    },
+   
     created() {
       const headers = {   /*Création de l'en-tête http de la requête avec le token récupérer du localstorage*/
         authorization: "Bearer " + this.token.token,
@@ -77,6 +74,7 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.content = ""; /*vider le formulaire après envois*/
+          this.$emit('ModifyComment',"commentModifier");
         });
     },
   },

@@ -67,12 +67,11 @@
           </div>
         </div>
       </div>
-       
     </body>
-    <footer class="foot">
+  </div>
+      <footer class="foot">
              <HelloFooter> </HelloFooter>  
              </footer>
-  </div>
 </template>
 
 <script>
@@ -112,7 +111,7 @@ export default {
         //S'il est trop long non//
         alert("Votre Mots de pass ne peux  contenir plus de 50 caractères");
       }
-      const regexEmail = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
+      const regexEmail =  /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
       if (!regexEmail.test(this.email)) {
         //Si la regex n'est pas respecté alors non//
         alert("Vous devait rentrer une Adresse Email valide");
@@ -124,8 +123,8 @@ export default {
           "Votre Mots de pass dois contenir au moins 1 caractère spéciaux une majuscule et un chiffre"
         );
       }
-      const postData = {
-        /*objet avec les value */ username: this.username,
+      const postData = {   /*objet avec les value */
+      username: this.username,
         email: this.email,
         password: this.password,
       };
@@ -139,7 +138,7 @@ export default {
 <style scoped>
 footer.foot {
     position: absolute;
-    bottom: -180px;
+    bottom: -143px;
     display:block;
     z-index:999;
 }
@@ -153,6 +152,7 @@ footer{
 #test a {
   font-weight: bold;
   color: #fd2d01 !important;
+  margin-left: 42px;
 }
 .a.pull.right.need-help {
   color: #fd2d01;
@@ -178,32 +178,27 @@ footer{
   color: #42b983;
 }
 
-.fullDiv {
-  background: url("https://wallpapershome.com/images/pages/pic_h/588.jpg")
-    no-repeat;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  position: absolute;
-  left: 0px;
-  bottom: -49.8px;
-  width: 100%;
-  height: 100%;
-
-  background-color: orange;
-}
-
-.innerRightBlurred[data-v-d2e720c2][data-v-d2e720c2] {
+.innerRightBlurred[data-v-d2e720c2][data-v-d2e720c2][data-v-d2e720c2] {
     position: absolute;
     opacity: 0.8;
     background-color: #202020;
     left: auto;
     width: 330px;
     bottom: 0;
-    top: 93px;
+    top: 70px;
     right: 0;
-    height: 635px;
+    height: 100%;
+}
+
+.fullDiv[data-v-d2e720c2] {
+    background: url(https://wallpapershome.com/images/pages/pic_h/588.jpg) no-repeat;
+    background-size: cover;
+    position: absolute;
+    left: 0px;
+    bottom: -70.8px;
+    width: 100%;
+    height: 100%;
+    background-color: orange;
 }
 
 .innerRight[data-v-d2e720c2] {
@@ -277,12 +272,20 @@ footer{
   border-top-right-radius: 0;
   width: 250px;
 }
-.account-wall[data-v-d2e720c2] {
+@media screen and (min-width: 200px) and (max-width: 768px) {
+  .account-wall {
+    margin-top: 200px;
+    margin-right: 25px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1890px) {
+  .account-wall {
     margin-top: auto;
     margin-right: 10px;
     padding-left: 200px;
     padding: 20px;
-    margin-top: 138px;
+    margin-top: 200px;
+  }
 }
 .login-title {
   color: #555;

@@ -40,12 +40,13 @@
               type="button"
               class="btn post-actions__upload attachments--btn"
             >
-              <label for="upload-image" class="post-actions__label">
+              <label for="upload-image" class="post-actions__label" >
                 <i class="fa fa-upload" aria-hidden="true"></i>
                 upload image
               </label>
             </button><!--écoute du changement de l'input en passant une function -->
             <input 
+              tabindex="0"
               type="file"
               id="upload-image"
               accept="image/png, image/jpeg, image/jpg"
@@ -65,10 +66,6 @@
 
 import axios from "axios";/*Import d'axios pour effectuer mes requêtes http*/ /*importer un SFC comme un module*/
 export default {
-  emit: ["newPost"],  /*définir les événements à  émettre vers son parent*/
-    components: {
-
-  },
   data: function () {   /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
       title: "", /*donnée réactif du v-model*/
@@ -107,7 +104,6 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
-          this.$emit("newPost", response.data);/*Envoyons le nouveau post au views froum*/
           this.$router.go();                   /*Rechargement du router pour affecter les modif*/
         });
     },

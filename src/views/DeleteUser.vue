@@ -81,7 +81,7 @@ export default {
           localStorage.removeItem(
             "token"
           ); /*Nous retirons le token du LocalStorage*/
-          this.$router.push("/signup"); /*Nous redirigeons vers la page login*/
+          this.$router.push("/signup"); /*Nous redirigeons vers la page signup*/
         });
     },
   },

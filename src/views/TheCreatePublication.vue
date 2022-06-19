@@ -18,6 +18,7 @@
           <div
             v-for="publication in publications"
             :key="publication.id"
+            :ref="publications"
             class="post-content"
           >
             <!--key index de chaque publication-->
@@ -40,10 +41,12 @@
                     </a>
                     <ThePublicationDelete
                       :publicationn="publication"
+                      @PostSuprimmer="this.updateData"
                     /><!--envois props les posts récuperer de la database-->
                     <!--rendu conditionnel si commentair vaut true-->
+                    <!--Réception avec emits De la suprimation du post-->
                     <button
-                      v-if="commentair"
+                      v-if="PostsModify"
                       @click="this.showoffInputPostMody()"
                       type="button"
                       class="btn btn-modifyPost"
@@ -81,9 +84,11 @@
                     ><!--récupèration de l'username de data-->
                     <!--Rendu conditionnel si commentaire et edit.. id et la même que c'elle de publication.id -->
                     <!-- l'affichage de l'input se fait si la variable contient le même id que celui du post ciblé-->
+                    <!--Réception avec emits De la modification du post-->
                     <ThePublicationModify
-                      v-if="commentair && editPostId == publication.id"
+                      v-if="PostsModify && editPostId == publication.id"
                       :publicationn="publication"
+                      @PostModifier="this.updateData"
                     />
                     <!--Rendu conditionnel si le post a une image ou pas-->
                     <div class="blog-card-image">
@@ -139,8 +144,8 @@
                         class="post-comment"
                       >
                         <!--key index de chaque commentaire-->
-                        <!--Rendu conditionnel si test == true et que le postId correspond à celui sur lequel on clique alors ça affiche les commentaires -->
-                        <div v-if="test && commentPostId == publication.id">
+                        <!--Rendu conditionnel si  afficheComment == true et que le postId correspond à celui sur lequel on clique alors ça affiche les commentaires -->
+                        <div v-if="afficheComment && commentPostId == publication.id">
                           <div class="card mb-2">
                             <div class="card-body p-2 p-sm-3">
                               <div class="media forum-item">
@@ -226,18 +231,22 @@
                                     </label>
                                   </button>
                                   <!--déclaration du composant -->
+                                  <!--Réception avec emits De la suprimation du commentaire-->
                                   <CommentDelete
+                                    @DeletedComment="this.updateData"
                                     :publicationn="publication"
                                     :commentt="commentaire"
                                   />
                                   <!--déclaration du composant-->
+                                  <!--Réception avec emits De la modification du commentaire-->
                                   <!--Passage de l'id de la publication et du comment au composant modify-->
                                   <CommentModify
+                                    @ModifyComment="this.updateData"
                                     :publicationn="publication"
                                     :commentt="commentaire"
                                     v-if="coment && commentaire.id == commentId"
                                   />
-                                  <!--Rendu conditionnel si coment et =True  et sue commentaire.id correspond à celui sur lequel on clique alors ça affiche les commentaires -->
+                                  <!--Rendu conditionnel si coment et =True  et que commentaire.id correspond à celui sur lequel on clique alors ça affiche les commentaires -->
                                 </div>
                                 <div
                                   class="text-muted small text-center align-self-center"
@@ -303,8 +312,8 @@
       </div>
     </div>
   </div>
-   <footer>
-  <HelloFooter> </HelloFooter>  
+  <footer>
+    <HelloFooter> </HelloFooter>
   </footer>
 </template>
 <script>
@@ -316,7 +325,6 @@ import ThePublication from "../components/ThePublication.vue";
 import ThePublicationModify from "../components/ThePublicationModify.vue";
 import ThePublicationDelete from "../components/ThePublicationDelete.vue";
 import CommentDelete from "../components/CommentDelete.vue";
-
 export default {
   /*importer un SFC comme un module*/
   props: [
@@ -330,8 +338,7 @@ export default {
     CommentModify,
     CommentDelete,
     HelloWorld,
-     HelloFooter
-    
+    HelloFooter,
   },
 
   data: function () {
@@ -341,92 +348,31 @@ export default {
         localStorage.getItem("token")
       ) /*Récupération du token présent dans le local storage*/,
       publications: [],
-      commentair: false,
-      test: false,
+      publicationActive: [],
+      PostsModify: false,
+      afficheComment: false,
       coment: false,
       comentDelete: false,
       editPostId: null,
       commentPostId: null,
       commentId: null,
       contentComment: "",
+      createComent: false,
     };
   },
-
   beforeMount() {
     this.created();
   },
+
   mounted() {
     this.updateData();
   },
 
   methods: {
-    /*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
-    showCommentModify(id) {
-      /*Fonction qui écoute le clic et return comment true et affecte l'id du comment d'où le clic a été effectué, ainsi seul l'input pour  modifier de ce commentaire s'affichera */
-      this.coment = true;
-      this.commentId = id;
-    },
-
-    offCommentModify() {
-      /*Fonction qui écoute le clic et return comment false ainsi fermer l'input modify */
-      this.coment = false;
-    },
-
-    showAllComments(postId) {
-      /*Fonction qui écoute le clic et return test true et affecte l'id du post d'où le clic a été effectué, ainsi seul les comments de ce post s'affichera */
-      if (!this.test) {
-        /*condition si test=false le bouton na pas reçu de clic*/
-        this.test = true; /*alors il passe a true au clic*/
-        this.commentPostId = postId; /*on affecte l'id du post*/
-      } else {
-        /*si test et true alors on masque les commentaires*/
-        this.test = false;
-        this.commentPostId = null;
-      }
-    },
-
-    showInputPostModify(postId) {
-      /*Fonction qui écoute le clic et return comentair true et affecte l'id du post d'où le clic a été effectué, ainsi seul le form modify de ce post s'affichera */
-      this.commentair = true;
-      this.editPostId = postId; /*on affecte l'id du post*/
-    },
-    showoffInputPostMody() {
-      /*Fonction qui écoute le clic et return comentair false et affecte l'id du post d'où le clic a été effectué, ainsi seul le form modify de ce post se masquera */
-      this.commentair = false;
-      this.editPostId = null;
-    },
-
-    convertDate(updatedAt) {
-      /*fonction qui récupère la date de création et extrait uniquement les données nécessaires*/
-      let substring = updatedAt.substring(0, 10);
-      let substring2 = updatedAt.substring(11, 19);
-      return substring + "-" + substring2;
-    },
-
-    updateData() {
-      setInterval(this.created, 2500);
-    },
-
-    created() {
-      /*Fonction qui get all publications de la database*/
-      const headers = {
-        authorization: "Bearer " + this.token.token,
-      };
-      axios
-
-        .get("http://localhost:3000/api/publication/post", { headers })
-        .then(
-          (response) => (this.publications = response.data)
-        ); /*Affecte-le résulta de la requête au tableau publications qui est dans la data réactive*/
-    },
-
-    save(id) {
-      /*écoute le clic */
-      console.log(id);
-      this.test = true; /*affectant les data pour que lorsque on submit un nouveaux commentaire ils s'affiche*/
+    save(id) { /*écoute le clic */
+      this.afficheComment = true; /*affectant les data pour que lorsque on submit un nouveaux commentaire ils s'affiche*/
       this.commentPostId = id;
-      const formData = {
-        /*Le constructeur FormData qui est l'objet qui représente les données du formulaire HTML*/
+      const formData = { /*Le constructeur FormData qui est l'objet qui représente les données du formulaire HTML*/
         content: this.contentComment,
         postId: this.id,
         username: this.token.username,
@@ -440,7 +386,65 @@ export default {
         })
         .then((response) => console.log(response));
       this.contentComment = ""; /*on vide l'input après le submit*/
-      this.updateData();
+      this.createComent = true; /*on indique grace a cette valeur passer au true le set interval peut démarer*/
+    },
+    /*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
+    showCommentModify(id) {
+      /*Fonction qui écoute le clic et return comment true et affecte l'id du comment d'où le clic a été effectué, ainsi seul l'input pour  modifier de ce commentaire s'affichera */
+      this.coment = true;
+      this.commentId = id;
+    },
+    offCommentModify() {
+      /*Fonction qui écoute le clic et return comment false ainsi fermer l'input modify */
+      this.coment = false;
+    },
+    showAllComments(postId) {
+      /*Fonction qui écoute le clic et return  afficheComment true et affecte l'id du post d'où le clic a été effectué, ainsi seul les comments de ce post s'affichera */
+      if (!this.afficheComment) {
+        /*condition si  afficheComment=false le bouton na pas reçu de clic*/
+        this.afficheComment = true; /*alors il passe a true au clic*/
+        this.commentPostId = postId; /*on affecte l'id du post*/
+      } else {
+        /*si  afficheComment et true alors on masque les commentaires*/
+        this.afficheComment = false;
+        this.commentPostId = null;
+      }
+    },
+    showInputPostModify(postId) {
+      /*Fonction qui écoute le clic et return PostsModify true et affecte l'id du post d'où le clic a été effectué, ainsi seul le form modify de ce post s'affichera */
+      this.PostsModify = true;
+      this.editPostId = postId; /*on affecte l'id du post*/
+    },
+    showoffInputPostMody() {
+      /*Fonction qui écoute le clic et return PostsModify false et affecte l'id du post d'où le clic a été effectué, ainsi seul le form modify de ce post se masquera */
+      this.PostsModify= false;
+      this.editPostId = null;
+    },
+    convertDate(updatedAt) {
+      /*fonction qui récupère la date de création et extrait uniquement les données nécessaires*/
+      let substring = updatedAt.substring(0, 10);
+      let substring2 = updatedAt.substring(11, 19);
+      return substring + "-" + substring2;
+    },
+    /*Fonction passer avec emits et c'est différent argument*/
+    /*si on modifie ou en supprime un comment ou un post */
+    /*le set interval se lancera ainsi récupérer les nouvelles données de l'api*/
+    updateData(ok, id, Modify, Deleted) {
+      if (ok || id || this.clao || Modify || Deleted) {
+        setInterval(this.created, 1000);
+        
+            }
+    },
+    created() {
+      /*Fonction qui get all publications de la database*/
+      const headers = {
+        authorization: "Bearer " + this.token.token,
+      };
+      axios
+        .get("http://localhost:3000/api/publication/post", { headers })
+        .then(
+          (response) => (this.publications = response.data)
+        ); /*Affecte-le résulta de la requête au tableau publications qui est dans la data réactive*/
     },
   },
 };
@@ -460,7 +464,6 @@ export default {
     right: 7px;
   }
 }
-
 @media screen and (min-width: 990px) and (max-width: 2024px) {
   .bouge {
     position: relative;
@@ -473,7 +476,6 @@ export default {
     left: 80px;
   }
 }
-
 @media screen and (min-width: 150px) and (max-width: 575px) {
   .button-62 {
     background: #a1a1a1;
@@ -505,7 +507,6 @@ export default {
       -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
       0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
   }
-
   .button-62:not([disabled]):hover {
     box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
       -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
@@ -541,13 +542,11 @@ export default {
     height: 45px;
     width: 89px;
   }
-
   .button-62:not([disabled]):focus {
     box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
       -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
       0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
   }
-
   .button-62:not([disabled]):hover {
     box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
       -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
@@ -608,37 +607,29 @@ body {
     margin-top: 0.21429rem !important;
   }
 }
-
 .g-height-50 {
   height: 50px;
 }
-
 .g-width-50 {
   width: 50px !important;
 }
-
 @media (min-width: 0) {
   .g-pa-30 {
     padding: 2.14286rem !important;
   }
 }
-
 .g-bg-secondary {
   background-color: #fafafa !important;
 }
-
 .u-shadow-v18 {
   box-shadow: 0 5px 10px -6px rgba(0, 0, 0, 0.15);
 }
-
 .g-color-gray-dark-v4 {
   color: #777 !important;
 }
-
 .g-font-size-12 {
   font-size: 0.85714rem !important;
 }
-
 .media-comment {
   margin-top: 20px;
 }
@@ -647,7 +638,6 @@ input#input-comment-13 {
   position: relative;
   height: 35px;
 }
-
 .btn:hover {
   color: #222;
   text-decoration: none;
@@ -737,7 +727,6 @@ span.userName {
     left: 80px;
   }
 }
-
 a {
   font-family: Roboto;
 }
@@ -756,7 +745,6 @@ a {
   box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%),
     0 1px 5px 0 rgb(0 0 0 / 12%);
 }
-
 .blog-card .blog-card-image {
   height: 60%;
   position: relative;
@@ -778,7 +766,6 @@ a {
   padding: 15px 0px;
   margin-top: 10px;
 }
-
 .blog-table {
   margin-bottom: 0px;
 }
@@ -796,7 +783,6 @@ a {
   bottom: 29px;
   left: 15px;
 }
-
 .blog-card-caption {
   font-weight: 700;
   font-family: "Roboto Slab", "Times New Roman", serif;
@@ -814,11 +800,9 @@ a {
   color: #333;
   text-decoration: none;
 }
-
 p {
   color: #3c4857;
 }
-
 p {
   margin-top: 15px;
   margin-bottom: 1rem;
@@ -829,7 +813,6 @@ p {
 .blog-card .ftr .author {
   color: #888;
 }
-
 .blog-card .ftr div {
   display: inline-block;
 }
@@ -890,19 +873,16 @@ button.btn.btn-d:hover {
   position: relative;
   left: 250px;
 }
-
 button.btn.btn-modifyComment {
   background-color: #4e5166b3;
   color: white;
   position: relative;
 }
-
 button.btn.btn-modifyComment:hover {
   background-color: #4e5166b3;
   color: black;
   position: relative;
 }
-
 .form-control {
   display: block;
   width: 100%;
@@ -921,7 +901,6 @@ button.btn.btn-modifyComment:hover {
   width: 510px;
   position: relative;
 }
-
 /** =====================
  * Responsive
  ========================*/
@@ -929,11 +908,9 @@ button.btn.btn-modifyComment:hover {
   .comments-container {
     width: 480px;
   }
-
   .comments-list .comment-box {
     width: 390px;
   }
-
   .reply-list .comment-box {
     width: 320px;
   }

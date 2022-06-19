@@ -39,13 +39,11 @@ import HelloWorld from "../components/HelloWorld.vue";
     HelloFooter
   }};
 </script>
-
 <style scoped>
 #test {
   height: 1000px;
   margin: 0;
 }
-
 .bg {
   /* The image used */
   background-image: url("../assets/homeGroupomania.webp");

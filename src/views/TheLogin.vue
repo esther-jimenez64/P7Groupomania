@@ -1,7 +1,7 @@
 <template>
-<div class="move">
- <HelloWorld> </HelloWorld>
- </div>
+  <div class="move">
+    <HelloWorld> </HelloWorld>
+  </div>
   <div id="test">
     <head>
       <title>Your Title here</title>
@@ -60,17 +60,12 @@
             </form>
           </div>
         </div>
-
       </div>
-      
     </body>
-    
   </div>
-<footer class="foot">
-             <HelloFooter> </HelloFooter>  
-             </footer>
-  
-
+  <footer class="foot">
+    <HelloFooter> </HelloFooter>
+  </footer>
 </template>
 
 <script>
@@ -81,7 +76,7 @@ export default {
   /*importer un SFC comme un module*/
   components: {
     HelloWorld,
-    HelloFooter
+    HelloFooter,
   },
   data: function () {
     /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
@@ -132,17 +127,15 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.move.nav{
-position:relative;left:10px;
+.move.nav {
+  position: relative;
+  left: 10px;
 }
 footer.foot {
-    position: absolute;
-    bottom: -175px;
+  position: absolute;
+  bottom: -175px;
 }
-#test a[data-v-092dea1e] {
-  font-weight: bold;
-  color: #fd2d01 !important;
-}
+
 .a.pull.right.need-help {
   color: red;
 }
@@ -160,34 +153,48 @@ footer.foot {
 #test a {
   font-weight: bold;
   color: #fd2d01 !important;
+  margin-left: 28px;
 }
 
 #test a.router-link-exact-active {
   color: #42b983;
 }
-
-.fullDiv[data-v-c168189c] {
-    background: url(https://www.renovationettravaux.fr/wp-content/uploads/2019/01/Prix-d%E2%80%99am%C3%A9nagement-de-bureau-professionnel.jpg) no-repeat;
-    background-size: cover;
-    position: absolute;
-    left: 0px;
-    bottom: -90.8px;
-    width: 100%;
-    height: 100%;
-    background-color: orange;
+@media screen and (min-width: 200px) and (max-width: 768px) {
+  .account-wall {
+    margin-top: 200px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1890px) {
+  .account-wall {
+    margin-top: auto;
+    margin-right: 10px;
+    padding-left: 200px;
+    padding: 20px;
+    margin-top: 200px;
+  }
 }
 
-
+.fullDiv[data-v-c168189c] {
+  background: url(https://www.renovationettravaux.fr/wp-content/uploads/2019/01/Prix-d%E2%80%99am%C3%A9nagement-de-bureau-professionnel.jpg)
+    no-repeat;
+  background-size: cover;
+  position: absolute;
+  left: 0px;
+  bottom: -90.8px;
+  width: 100%;
+  height: 100%;
+  background-color: orange;
+}
 .innerRightBlurred[data-v-c168189c][data-v-c168189c] {
-    position: absolute;
-    opacity: 0.8;
-    background-color: #202020;
-    left: auto;
-    width: 335px;
-    top: 92px;
-    bottom: 0;
-    right: 0;
-    height: 631px;
+  position: absolute;
+  opacity: 0.8;
+  background-color: #202020;
+  left: auto;
+  width: 335px;
+  top: 92px;
+  bottom: 0;
+  right: 0;
+  height: 100%;
 }
 .innerRight {
   position: absolute;
@@ -265,7 +272,7 @@ footer.foot {
   margin-right: 10px;
   padding-left: 200px;
   padding: 20px;
-  margin-top: 150px;
+  margin-top: 200px;
 }
 .login-title {
   color: #555;

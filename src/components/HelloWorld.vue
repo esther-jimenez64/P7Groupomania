@@ -15,8 +15,8 @@
   </head>
   <header>
     <h1>Groupomania</h1>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle" />
-     <label for="nav-toggle" class="acessNav">"bouton pour afficher le menu navigation phone"</label>      
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" tabindex="0" />
+     <label for="nav-toggle" class="acessNav" >"bouton pour afficher le menu navigation phone"</label>  
     <nav>
       <ul>
         <li>
@@ -40,7 +40,7 @@
         </li>
       </ul>
     </nav>
-    <label for="nav-toggle" class="nav-toggle-label">
+    <label for="nav-toggle" class="nav-toggle-label" tabindex="0">
       <span></span>
     </label>
   </header>
