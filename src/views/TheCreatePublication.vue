@@ -372,8 +372,9 @@ export default {
     save(id) { /*écoute le clic */
       this.afficheComment = true; /*affectant les data pour que lorsque on submit un nouveaux commentaire ils s'affiche*/
       this.commentPostId = id;
+      let value = document.getElementById(`input-comment-${id}`).value;
       const formData = { /*Le constructeur FormData qui est l'objet qui représente les données du formulaire HTML*/
-        content: this.contentComment,
+        content: value,
         postId: this.id,
         username: this.token.username,
       };
@@ -385,7 +386,7 @@ export default {
           },
         })
         .then((response) => console.log(response));
-      this.contentComment = ""; /*on vide l'input après le submit*/
+       value = document.getElementById(`input-comment-${id}`).value ="" /*on vide l'input après le submit*/
       this.createComent = true; /*on indique grace a cette valeur passer au true le set interval peut démarer*/
     },
     /*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
