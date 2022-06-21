@@ -1,11 +1,11 @@
 <template>
   <div id="test">
-   <HelloWorld> </HelloWorld>
+    <HelloWorld> </HelloWorld>
     <link rel="icon" href="icon.ico" />
     <button class="card" tabindex="0">
       <img
         loading="lazy"
-				alt="photo d'une figure humaine représentant une photo de profils qui se deconnecte"
+        alt="photo d'une figure humaine représentant une photo de profils qui se deconnecte"
         class="profile-img"
         src="https://cdn-icons-png.flaticon.com/512/6568/6568636.png"
       />
@@ -15,7 +15,8 @@
     </button>
 
     <div class="login">
-      <h1>Vos informations</h1> <!--écoute du submit de l'input en passant une function -->
+      <h1>Vos informations</h1>
+      <!--écoute du submit de l'input en passant une function -->
       <form @submit.prevent="guardar()" method="post">
         <input
           v-model="email"
@@ -42,41 +43,49 @@
       </form>
     </div>
   </div>
-      <footer>
-  <HelloFooter> </HelloFooter>  
+  <footer>
+    <HelloFooter> </HelloFooter>
   </footer>
 </template>
 
 <script>
 import HelloFooter from "../components/HelloFooter.vue";
 import HelloWorld from "../components/HelloWorld.vue";
-import axios from "axios";                   /*Import d'axios pour effectuer mes requêtes http*/ /*importer un SFC comme un module*/
-export default {                              /*définir les événements à  émettre vers son parent*/
+import axios from "axios"; /*Import d'axios pour effectuer mes requêtes http*/ /*importer un SFC comme un module*/
+export default {
+  /*définir les événements à  émettre vers son parent*/
   components: {
     HelloWorld,
-    HelloFooter
+    HelloFooter,
   },
-  emit: ["users"],                             /*définir les événements à  émettre vers son parent*/
-  data() {                                   /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
+  emit: ["users"] /*définir les événements à  émettre vers son parent*/,
+  data() {
+    /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
-      album: 1,                               /*donnée réactif du v-model*/
+      album: 1 /*donnée réactif du v-model*/,
       post: "",
       email: "",
       password: "",
       username: "",
-      token: JSON.parse(localStorage.getItem("token")),          /*Récupération du token présent dans le local storage*/
+      token: JSON.parse(
+        localStorage.getItem("token")
+      ) /*Récupération du token présent dans le local storage*/,
     };
   },
 
-  methods: {/*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
-    guardar() {  /*Fonction qui écoute le submit et modifi l'user grâce à l'id*/
+  methods: {
+    /*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
+    guardar() {
+      /*Fonction qui écoute le submit et modifi l'user grâce à l'id*/
       const postData = {
         username: this.username,
         email: this.email,
         password: this.password,
         id: this.token.userId,
       };
-      const id = this.token.userId;              /*Récupération de l'id de l'user qui est dans le LocalStorage*/
+      const id =
+        this.token
+          .userId; /*Récupération de l'id de l'user qui est dans le LocalStorage*/
       axios
         .put(`http://localhost:3000/api/user/${id}/modify`, postData, {
           headers: {
@@ -84,16 +93,24 @@ export default {                              /*définir les événements à  é
           },
         })
         .then((res) => {
-          localStorage.removeItem("token");/*Nous retirons le token du LocalStorage*/
-          localStorage.setItem("token", JSON.stringify(res.data));/*on crée l'item token en lui passe les données de la res 200 token username userId*/
-          this.$router.push("/selfSpace");    /*Nous redirigeons vers la page espace personnel*/
+          localStorage.removeItem(
+            "token"
+          ); /*Nous retirons le token du LocalStorage*/
+          localStorage.setItem(
+            "token",
+            JSON.stringify(res.data)
+          ); /*on crée l'item token en lui passe les données de la res 200 token username userId*/
+          this.$emit("UserModifier", "publicationModifier");
+          this.$router.push(
+            "/selfSpace"
+          ); /*Nous redirigeons vers la page espace personnel*/
         });
     },
   },
 };
 </script>
 <style scoped>
- ::placeholder {
+::placeholder {
   color: white;
   font-size: 1.3em;
 }
@@ -111,9 +128,9 @@ export default {                              /*définir les événements à  é
   top: 15px;
 }
 b[data-v-57759f7c] {
-    font-weight: bolder;
-    font-size: 17px;
-    color: white;
+  font-weight: bolder;
+  font-size: 17px;
+  color: white;
 }
 /* On mouse-over, add a deeper shadow */
 .card:hover {
@@ -312,7 +329,7 @@ html {
 }
 .login {
   position: absolute;
-  top:  70%;
+  top: 70%;
   left: 50%;
   margin: -150px 0 0 -150px;
   width: 300px;

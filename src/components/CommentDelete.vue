@@ -1,5 +1,5 @@
 <template>
-<HelloWorld> </HelloWorld>
+  <HelloWorld> </HelloWorld>
   <!--écoute du clic sur le bouton en retirant l'event default et le remplacant par la methode guardar-->
   <div>
     <button
@@ -22,18 +22,24 @@ export default {
     "publicationn",
     "commentt",
   ] /*passer des données de notre composant vers un autre composant*/,
-  data: function () {/*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
+  data: function () {
+    /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
       userId: "",
       token: JSON.parse(
-      localStorage.getItem("token")
+        localStorage.getItem("token")
       ) /*Récupération du token présent dans le local storage*/,
     };
   },
-  methods: {  /*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
-    guardar() {  /*function guardar qui écouter le clic et qui exécuter une requête delete avec axios*/
-      const id = this.token.userId;     /*Récupération de l'id de l'user du localStorage*/
-      const CommentId = this.commentt.id;  /*Récupération de l'id du comment à supprimer grâce au props*/
+  methods: {
+    /*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
+    guardar() {
+      /*function guardar qui écouter le clic et qui exécuter une requête delete avec axios*/
+      const id =
+        this.token.userId; /*Récupération de l'id de l'user du localStorage*/
+      const CommentId =
+        this.commentt
+          .id; /*Récupération de l'id du comment à supprimer grâce au props*/
       axios
         .delete(`http://localhost:3000/api/comment/${id}/${CommentId}`, {
           headers: {
@@ -42,13 +48,17 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
-          this.$emit('DeletedComment',"commentModifier");
+          this.$emit(
+            "DeletedComment",
+            "commentModifier"
+          ); /*nous envoyer que le comment à était suprimer*/
         });
     },
   },
 };
-</script>   
-<style scoped>/*style css affecté uniquement a ce component scoped*/
+</script>
+<style scoped>
+/*style css affecté uniquement a ce component scoped*/
 button.btn.btn-deleteComment {
   color: #fff;
   background-color: #ff4136;

@@ -36,12 +36,14 @@
         />
         <!--v-model email pour la liaison d'entrée de formulaire  bidirectionnelle. -->
         <router-link
+          @ModifyUser="this.updateData"
           class="btn btn-primary btn-block btn-large"
           to="/ModifyUser"
         >
           Modifier</router-link
         ><!--link vers views modify-->
         <router-link
+          @DeletedUser="this.updateData"
           class="btn btn-primary btn-block btn-large"
           to="/DeleteUser"
         >
@@ -83,8 +85,14 @@ export default {
 
   methods: {
     /*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
-    updateData() {
-      setInterval(this.created, 2500);
+
+    /*Fonction passer avec emits et c'est différent argument*/
+    /*si on modifie ou en supprime un user*/
+    /*le setTimeout se lancera ainsi récupérer les nouvelles données du token*/
+    updateData(UserModifier, DeleteUser) {
+      if (UserModifier || DeleteUser) {
+        setTimeout(this.token, 1000);
+      }
     },
 
     deconnecter() {

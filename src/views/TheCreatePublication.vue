@@ -121,7 +121,7 @@
                     <!--Rendu conditionnel si le post contient des commentaire l'affichage du bouton se fait -->
                     <div class="blog-table">
                       <button
-                        v-if="publication.Comments.length > 0 "
+                        v-if="publication.Comments.length > 0"
                         @click="this.showAllComments(publication.id)"
                         type="button"
                         class="btn btn-d"
@@ -282,26 +282,25 @@
                             <br /><!--récupèration de l'username du localStorage-->
                             <div class="detailBox">
                               <form
-                              @submit.prevent="save(publication.id)"
-                              class="form-inline"
-                              role="form"
-                            >
-                              <input
-                              @click.prevent="this.showAllComments()"
-                                :id="`input-comment-${publication.id}`"
-                                class="form-control"
-                                type="text"
-                                placeholder="Your comments"
-                              />
-                              <button
-                               @click.prevent="this.save(publication.id)"
-                                   
-                                class="button-62"
-                                role="button"
+                                @submit.prevent="save(publication.id)"
+                                class="form-inline"
+                                role="form"
                               >
-                                publish
-                              </button>
-                            </form>
+                                <input
+                                  @click.prevent="this.showAllComments()"
+                                  :id="`input-comment-${publication.id}`"
+                                  class="form-control"
+                                  type="text"
+                                  placeholder="Your comments"
+                                />
+                                <button
+                                  @click.prevent="this.save(publication.id)"
+                                  class="button-62"
+                                  role="button"
+                                >
+                                  publish
+                                </button>
+                              </form>
                             </div>
                           </a>
                         </div>
@@ -362,7 +361,7 @@ export default {
       commentId: null,
       contentComment: "",
       createComent: false,
-      TestInterval: false
+      TestInterval: false,
     };
   },
   beforeMount() {
@@ -383,7 +382,7 @@ export default {
         content: value,
         userId: this.token.userId,
         postId: this.id,
-        username:this.token.user
+        username: this.token.user,
       };
       const PostId = id;
       console.log(value);
@@ -394,10 +393,10 @@ export default {
           },
         })
         .then((response) => console.log(response));
-       this.value = null;
-     document.getElementById(`input-comment-${id}`).value="";
-       this.createComent = true;
-       this.updateData();
+      this.value = null;
+      document.getElementById(`input-comment-${id}`).value = "";
+      this.createComent = true;
+      this.updateData();
     },
     /*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
     showCommentModify(id) {
@@ -439,11 +438,19 @@ export default {
     },
     /*Fonction passer avec emits et c'est différent argument*/
     /*si on modifie ou en supprime un comment ou un post */
-    /*le set interval se lancera ainsi récupérer les nouvelles données de l'api*/
- 
+    /*le setTimeout se lancera ainsi récupérer les nouvelles données de l'api*/
+
     updateData(ok, id, Modify, Deleted) {
-      if (ok || id || this.createComent ||this.afficheComment ||this.commentPostId || Modify || Deleted) {
-           setTimeout(this.created,1000);         
+      if (
+        ok ||
+        id ||
+        this.createComent ||
+        this.afficheComment ||
+        this.commentPostId ||
+        Modify ||
+        Deleted
+      ) {
+        setTimeout(this.created, 1000);
       }
     },
     created() {

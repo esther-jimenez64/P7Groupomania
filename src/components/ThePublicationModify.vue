@@ -118,7 +118,10 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
-          this.$emit('PostModifier',"publicationModifier");
+          this.$emit(
+            "PostModifier",
+            "publicationModifier"
+          ); /*nous envoyer que le post à était modifier*/
         });
     },
   },
@@ -203,7 +206,6 @@ ul {
   resize: none;
 }
 .widget-post__textarea:focus {
-
 }
 .widget-post__options {
   padding: 0.5em;

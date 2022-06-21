@@ -3,28 +3,32 @@
     <div class="widget-post" aria-labelledby="post-header-title">
       <div class="center">
         <img
-        loading="lazy"
-				alt="photo d'une figure humaine gris représentant une photo de profils"
+          loading="lazy"
+          alt="photo d'une figure humaine gris représentant une photo de profils"
           src="https://tse1.mm.bing.net/th?id=OIP.etoPZN5PSRA0lJXcXCm_KAHaHa&amp;pid=Api&amp;rs=1&amp;c=1&amp;qlt=95&amp;w=123&amp;h=123"
           class="chex"
-        /><span>{{ this.token.username }}</span> <!--afectation de l'username-->
+        /><span>{{ this.token.username }}</span>
+        <!--afectation de l'username-->
       </div>
       <div class="widget-post__header">
         <h2 class="widget-post__title" id="post-header-title">
           <i class="fa fa-pencil" aria-hidden="true"></i>
-          <input v-model="title" placeholder="Title" /> <!--V-model title pour la liaison d'entrée de formulaire à content bidirectionnelle-->
+          <input v-model="title" placeholder="Title" />
+          <!--V-model title pour la liaison d'entrée de formulaire à content bidirectionnelle-->
         </h2>
-      </div> <!--écoute du submit retirement de l'event default en mettant la funtion guardar-->
-      <form 
+      </div>
+      <!--écoute du submit retirement de l'event default en mettant la funtion guardar-->
+      <form
         id="widget-form"
         class="widget-post__form"
         @submit.prevent="guardar()"
         name="form"
         aria-label="post widget"
-      >  <!--V-model content pour la liaison d'entrée du textarea à content bidirectionnelle-->
+      >
+        <!--V-model content pour la liaison d'entrée du textarea à content bidirectionnelle-->
         <div class="widget-post__content">
           <label for="post-content" class="sr-only">share your moments</label>
-          <textarea 
+          <textarea
             v-model="content"
             name="post"
             id="post-content"
@@ -40,12 +44,12 @@
               type="button"
               class="btn post-actions__upload attachments--btn"
             >
-              <label for="upload-image" class="post-actions__label" >
+              <label for="upload-image" class="post-actions__label">
                 <i class="fa fa-upload" aria-hidden="true"></i>
                 upload image
-              </label>
-            </button><!--écoute du changement de l'input en passant une function -->
-            <input 
+              </label></button
+            ><!--écoute du changement de l'input en passant une function -->
+            <input
               tabindex="0"
               type="file"
               id="upload-image"
@@ -63,32 +67,39 @@
 </template>
 
 <script>
-
-import axios from "axios";/*Import d'axios pour effectuer mes requêtes http*/ /*importer un SFC comme un module*/
+import axios from "axios"; /*Import d'axios pour effectuer mes requêtes http*/ /*importer un SFC comme un module*/
 export default {
-  data: function () {   /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
+  data: function () {
+    /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
-      title: "", /*donnée réactif du v-model*/
+      title: "" /*donnée réactif du v-model*/,
       content: "",
       userId: "",
       file: "",
-      token: JSON.parse(localStorage.getItem("token")), /*Récupération du token présent dans le local storage*/
+      token: JSON.parse(
+        localStorage.getItem("token")
+      ) /*Récupération du token présent dans le local storage*/,
       selectedFile: null,
     };
   },
-  methods: {/*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
+  methods: {
+    /*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
     OneFileSelected(e) {
-      this.file = e.target.files[0];/*récupération de l'image passer au event change*/
+      this.file =
+        e.target.files[0]; /*récupération de l'image passer au event change*/
     },
 
     guardar() {
-      const formData = new FormData(); /*Le constructeur FormData qui est l'objet qui représente les données du formulaire HTML*/ 
+      const formData =
+        new FormData(); /*Le constructeur FormData qui est l'objet qui représente les données du formulaire HTML*/
       {
-        if (this.file == null) { /*si il n'y a pas d'image*/
+        if (this.file == null) {
+          /*si il n'y a pas d'image*/
           formData.append("title", this.title);
           formData.append("content", this.content);
           formData.append("username", this.token.username);
-        } else { /*si il y a une image*/
+        } else {
+          /*si il y a une image*/
           formData.append("title", this.title);
           formData.append("content", this.content);
           formData.append("image", this.file);
@@ -104,7 +115,7 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
-          this.$router.go();                   /*Rechargement du router pour affecter les modif*/
+          this.$router.go(); /*Rechargement du router pour affecter les modif*/
         });
     },
   },

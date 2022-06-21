@@ -69,9 +69,9 @@
       </div>
     </body>
   </div>
-      <footer class="foot">
-             <HelloFooter> </HelloFooter>  
-             </footer>
+  <footer class="foot">
+    <HelloFooter> </HelloFooter>
+  </footer>
 </template>
 
 <script>
@@ -82,7 +82,7 @@ export default {
   /*importer un SFC comme un module*/
   components: {
     HelloWorld,
-    HelloFooter
+    HelloFooter,
   },
   data: function () {
     /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
@@ -111,7 +111,7 @@ export default {
         //S'il est trop long non//
         alert("Votre Mots de pass ne peux  contenir plus de 50 caractères");
       }
-      const regexEmail =  /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
+      const regexEmail = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
       if (!regexEmail.test(this.email)) {
         //Si la regex n'est pas respecté alors non//
         alert("Vous devait rentrer une Adresse Email valide");
@@ -123,8 +123,8 @@ export default {
           "Votre Mots de pass dois contenir au moins 1 caractère spéciaux une majuscule et un chiffre"
         );
       }
-      const postData = {   /*objet avec les value */
-      username: this.username,
+      const postData = {
+        /*objet avec les value */ username: this.username,
         email: this.email,
         password: this.password,
       };
@@ -137,13 +137,13 @@ export default {
 </script>
 <style scoped>
 footer.foot {
-    position: absolute;
-    bottom: -143px;
-    display:block;
-    z-index:999;
+  position: absolute;
+  bottom: -143px;
+  display: block;
+  z-index: 999;
 }
-footer{
-  display:block;
+footer {
+  display: block;
 }
 #test a[data-v-092dea1e] {
   font-weight: bold;
@@ -179,35 +179,36 @@ footer{
 }
 
 .innerRightBlurred[data-v-d2e720c2][data-v-d2e720c2][data-v-d2e720c2] {
-    position: absolute;
-    opacity: 0.8;
-    background-color: #202020;
-    left: auto;
-    width: 330px;
-    bottom: 0;
-    top: 70px;
-    right: 0;
-    height: 100%;
+  position: absolute;
+  opacity: 0.8;
+  background-color: #202020;
+  left: auto;
+  width: 330px;
+  bottom: 0;
+  top: 70px;
+  right: 0;
+  height: 100%;
 }
 
 .fullDiv[data-v-d2e720c2] {
-    background: url(https://wallpapershome.com/images/pages/pic_h/588.jpg) no-repeat;
-    background-size: cover;
-    position: absolute;
-    left: 0px;
-    bottom: -70.8px;
-    width: 100%;
-    height: 100%;
-    background-color: orange;
+  background: url(https://wallpapershome.com/images/pages/pic_h/588.jpg)
+    no-repeat;
+  background-size: cover;
+  position: absolute;
+  left: 0px;
+  bottom: -70.8px;
+  width: 100%;
+  height: 100%;
+  background-color: orange;
 }
 
 .innerRight[data-v-d2e720c2] {
-    position: absolute;
-    left: auto;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    color: #707070;
+  position: absolute;
+  left: auto;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  color: #707070;
 }
 .innerLeft {
   position: absolute;
@@ -312,14 +313,14 @@ footer{
   margin-bottom: 20px;
 }
 .innerRightBlurred[data-v-d2e720c2] {
-    position: absolute;
-    opacity: 0.8;
-    background-color: #202020;
-    left: auto;
-    width: 330px;
-    top: 10px;
-    bottom: 0;
-    right: 0;
-    height: 673px;
+  position: absolute;
+  opacity: 0.8;
+  background-color: #202020;
+  left: auto;
+  width: 330px;
+  top: 10px;
+  bottom: 0;
+  right: 0;
+  height: 673px;
 }
 </style>

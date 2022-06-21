@@ -18,50 +18,67 @@
         class="btn btn-SendModify"
         data-v-5cc6dbb6=""
         data-v-7a034ad9=""
-      ><i class="fa-solid fa-paper-plane-top"></i> Send
-      <font-awesome-icon icon="fa-solid fa-paper-plane-top" />  
+      >
+        <i class="fa-solid fa-paper-plane-top"></i> Send
+        <font-awesome-icon icon="fa-solid fa-paper-plane-top" />
       </button>
     </form>
   </div>
 </template>
 
 <script>
-import axios from "axios";  /*Import d'axios pour effectuer mes requêtes http*/ /*importer un SFC comme un module*/
+import axios from "axios"; /*Import d'axios pour effectuer mes requêtes http*/ /*importer un SFC comme un module*/
 export default {
-  props: ["publicationn", "commentt"],/*passer des données de notre composant vers un autre composant*/
-  data: function () { /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
+  props: [
+    "publicationn",
+    "commentt",
+  ] /*passer des données de notre composant vers un autre composant*/,
+  data: function () {
+    /*Les données et le DOM sont maintenant couplés, et tout est à présent réactif*/
     return {
-      content: "",/*donnée réactif du v-model*/
+      content: "" /*donnée réactif du v-model*/,
       userId: "",
-      token: JSON.parse(localStorage.getItem("token")),/*Récupération du token présent dans le local storage*/
-    };  
+      token: JSON.parse(
+        localStorage.getItem("token")
+      ) /*Récupération du token présent dans le local storage*/,
+    };
   },
-  mounted() { 
-   
-  },
-   
-  methods: { /*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
-   
+  mounted() {},
+
+  methods: {
+    /*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
+
     created() {
-      const headers = {   /*Création de l'en-tête http de la requête avec le token récupérer du localstorage*/
+      const headers = {
+        /*Création de l'en-tête http de la requête avec le token récupérer du localstorage*/
         authorization: "Bearer " + this.token.token,
       };
       axios
         .get("http://localhost:3000/api/publication/post", { headers })
         .then((response) => (this.publications = response.data));
-    },/*Le constructeur FormData qui est l'objet qui représente les données du formulaire HTML*/ 
+    } /*Le constructeur FormData qui est l'objet qui représente les données du formulaire HTML*/,
     guardar() {
-     const formData = { 
-        content: this.content,          
-        userId: this.token.userId,      /*Récupération de l'id de l'user du localStorage*/
-        username: this.token.username,  /*Récupération de l'username de l'user du localStorage*/
+      const formData = {
+        content: this.content,
+        userId:
+          this.token.userId /*Récupération de l'id de l'user du localStorage*/,
+        username:
+          this.token
+            .username /*Récupération de l'username de l'user du localStorage*/,
       };
-      const id = this.token.userId;      /*Récupération de l'id de l'user du localStorage************/
-      const PostId = this.publicationn.id;  /*Récupération de l'id du post grâce au props*************/
-      const CommentId = this.commentt.id;   /*Récupération de l'id du comment grâce au props**********/
+      const id =
+        this.token
+          .userId; /*Récupération de l'id de l'user du localStorage************/
+      const PostId =
+        this.publicationn
+          .id; /*Récupération de l'id du post grâce au props*************/
+      const CommentId =
+        this.commentt
+          .id; /*Récupération de l'id du comment grâce au props**********/
 
       axios
-        .put(  /*requête modify un comment*/
+        .put(
+          /*requête modify un comment*/
           `http://localhost:3000/api/comment/${id}/${PostId}/${CommentId}`,
           formData,
           {
@@ -74,7 +91,10 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.content = ""; /*vider le formulaire après envois*/
-          this.$emit('ModifyComment',"commentModifier");
+          this.$emit(
+            "ModifyComment",
+            "commentModifier"
+          ); /*nous envoyer que le comment à était modifier*/
         });
     },
   },

@@ -1,43 +1,47 @@
 <template>
- <div class="navMove">
+  <div class="navMove">
     <HelloWorld> </HelloWorld>
-    </div>
-    <head>
-       <meta name="description" content="Web Social">
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-    </head>
-    <div id="test">
-      <div class="bg"></div>
-      <div class="blog-card spring-fever">
-        <div class="title-content">
-          <h2><a href="#">Groupomania</a></h2>
-          <div class="intro"><a href="#">quesque?</a></div>
-        </div>
-        <div class="card-info">
-          Est un réseau social interne pour les employés de Groupomania. Le but
-          est de faciliter les interactions entre collègues.Avec plusieurs
-          fonctionnalités pour favoriser les échanges entre collègues.
-          <router-link to="/signup"
-            >Nous Rejoindre<span class="licon icon-arr icon-black"></span
-          ></router-link> <!--link vers views-->
-          <router-view />  <!--router-view affichera le composant qui correspond à l'url.-->
-        </div>
-        <div class="gradient-overlay"></div>
-        <div class="color-overlay"></div>
+  </div>
+  <head>
+    <meta name="description" content="Web Social" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <div id="test">
+    <div class="bg"></div>
+    <div class="blog-card spring-fever">
+      <div class="title-content">
+        <h2><a href="#">Groupomania</a></h2>
+        <div class="intro"><a href="#">quesque?</a></div>
       </div>
+      <div class="card-info">
+        Est un réseau social interne pour les employés de Groupomania. Le but
+        est de faciliter les interactions entre collègues.Avec plusieurs
+        fonctionnalités pour favoriser les échanges entre collègues.
+        <router-link to="/signup"
+          >Nous Rejoindre<span class="licon icon-arr icon-black"></span
+        ></router-link>
+        <!--link vers views-->
+        <router-view />
+        <!--router-view affichera le composant qui correspond à l'url.-->
+      </div>
+      <div class="gradient-overlay"></div>
+      <div class="color-overlay"></div>
     </div>
-       <footer>
-  <HelloFooter> </HelloFooter>  
+  </div>
+  <footer>
+    <HelloFooter> </HelloFooter>
   </footer>
 </template>
 <script>
 import HelloFooter from "../components/HelloFooter.vue";
 import HelloWorld from "../components/HelloWorld.vue";
- export default {  /*importer un SFC comme un module*/
+export default {
+  /*importer un SFC comme un module*/
   components: {
     HelloWorld,
-    HelloFooter
-  }};
+    HelloFooter,
+  },
+};
 </script>
 <style scoped>
 #test {

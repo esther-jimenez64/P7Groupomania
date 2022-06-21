@@ -10,6 +10,6 @@ footer p {
   font-family: "Lato", bold;
   font-size: 2.1875rem;
   margin-top: 5px;
-   background-color: white;
+  background-color: white;
 }
 </style>
