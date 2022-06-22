@@ -93,6 +93,7 @@ export default {
       if (UserModifier || DeleteUser) {
         setTimeout(this.created, 1000);
          setTimeout(this.token, 1000);
+         this.$router.go();
       }
     },
 

@@ -73,6 +73,13 @@ export default {
   },
 
   methods: {
+      deconnecter() {
+      this.token =
+        localStorage.removeItem(
+          "token"
+        ); /*Nous retirons le token du LocalStorage*/
+      this.$router.push("/login"); /*Nous redirigeons vers la page login*/
+    },
     /*objet méthode pour déclarer mes function utiles  pour effectuer une action avec la directive v-on sur un élément pour gérer les événements*/
     guardar() {
       /*Fonction qui écoute le submit et modifi l'user grâce à l'id*/
