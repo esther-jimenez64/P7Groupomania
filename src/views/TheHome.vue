@@ -28,9 +28,9 @@
       <div class="color-overlay"></div>
     </div>
   </div>
-  <footer>
+     <footer class="foot">
     <HelloFooter> </HelloFooter>
-  </footer>
+   </footer>
 </template>
 <script>
 import HelloFooter from "../components/HelloFooter.vue";
@@ -44,11 +44,26 @@ export default {
 };
 </script>
 <style scoped>
-#test {
-  height: 1000px;
-  margin: 0;
+@media screen and (min-width: 1891px) and (max-width: 3000px) {
+  .bg {
+  /* The image used */
+  background-image: url("../assets/homeGroupomania.webp");
+  /* Full height */
+  height: 180%;
+  width: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-.bg {
+.foot footer{
+    position: relative;
+    top: 790px;
+    left: 70px;
+}
+}
+@media screen and (min-width: 200px) and (max-width: 1890px) {
+  .bg {
   /* The image used */
   background-image: url("../assets/homeGroupomania.webp");
   /* Full height */
@@ -59,6 +74,14 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+}
+
+#test {
+  height: 1000px;
+  margin: 0;
+}
+
 
 @import url(//fonts.googleapis.com/css?family=Abril+Fatface|Droid+Serif:400,700,400italic,700italic);
 html,

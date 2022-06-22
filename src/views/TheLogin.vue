@@ -162,7 +162,19 @@ footer.foot {
 @media screen and (min-width: 200px) and (max-width: 768px) {
   .account-wall {
     margin-top: 200px;
+    margin-right: 37px;
   }
+  .innerRightBlurred {
+  position: absolute;
+  opacity: 0.8;
+  background-color: #202020;
+  left: auto;
+  width: 330px;
+  bottom: 0;
+  top: 90px;
+  right: 0;
+  height: 100%;
+}
 }
 @media screen and (min-width: 768px) and (max-width: 1890px) {
   .account-wall {
@@ -171,9 +183,40 @@ footer.foot {
     padding-left: 200px;
     padding: 20px;
     margin-top: 200px;
+    margin-right: 80px;
   }
+    .innerRightBlurred {
+  position: absolute;
+  opacity: 0.8;
+  background-color: #202020;
+  left: auto;
+  width: 430px;
+  bottom: 0;
+  top: 92px;
+  right: 0;
+  height: 100%;
 }
-
+}
+@media screen and (min-width: 1891px) and (max-width: 3000px) {
+  .account-wall {
+    margin-top: auto;
+    margin-right: 200px;
+    padding-left: -400px;
+    padding: 20px;
+    margin-top: 500px;
+  }
+  .innerRightBlurred{
+  position: absolute;
+  opacity: 0.8;
+  background-color: #202020;
+  left: auto;
+  width: 730px;
+  bottom: 0;
+  top: 70px;
+  right: 0;
+  height: 100%;
+}
+}
 .fullDiv[data-v-c168189c] {
   background: url(https://www.renovationettravaux.fr/wp-content/uploads/2019/01/Prix-d%E2%80%99am%C3%A9nagement-de-bureau-professionnel.jpg)
     no-repeat;
@@ -185,17 +228,7 @@ footer.foot {
   height: 100%;
   background-color: orange;
 }
-.innerRightBlurred[data-v-c168189c][data-v-c168189c] {
-  position: absolute;
-  opacity: 0.8;
-  background-color: #202020;
-  left: auto;
-  width: 335px;
-  top: 92px;
-  bottom: 0;
-  right: 0;
-  height: 100%;
-}
+
 .innerRight {
   position: absolute;
   left: auto;
@@ -267,13 +300,7 @@ footer.foot {
   border-top-right-radius: 0;
   width: 250px;
 }
-.account-wall {
-  margin-top: auto;
-  margin-right: 10px;
-  padding-left: 200px;
-  padding: 20px;
-  margin-top: 200px;
-}
+
 .login-title {
   color: #555;
   font-size: 50px;

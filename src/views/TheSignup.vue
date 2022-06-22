@@ -178,17 +178,7 @@ footer {
   color: #42b983;
 }
 
-.innerRightBlurred[data-v-d2e720c2][data-v-d2e720c2][data-v-d2e720c2] {
-  position: absolute;
-  opacity: 0.8;
-  background-color: #202020;
-  left: auto;
-  width: 330px;
-  bottom: 0;
-  top: 70px;
-  right: 0;
-  height: 100%;
-}
+
 
 .fullDiv[data-v-d2e720c2] {
   background: url(https://wallpapershome.com/images/pages/pic_h/588.jpg)
@@ -278,6 +268,17 @@ footer {
     margin-top: 200px;
     margin-right: 25px;
   }
+  .innerRightBlurred[data-v-d2e720c2][data-v-d2e720c2][data-v-d2e720c2] {
+  position: absolute;
+  opacity: 0.8;
+  background-color: #202020;
+  left: auto;
+  width: 330px;
+  bottom: 0;
+  top: 70px;
+  right: 0;
+  height: 100%;
+}
 }
 @media screen and (min-width: 768px) and (max-width: 1890px) {
   .account-wall {
@@ -287,6 +288,37 @@ footer {
     padding: 20px;
     margin-top: 200px;
   }
+  .innerRightBlurred[data-v-d2e720c2][data-v-d2e720c2][data-v-d2e720c2] {
+  position: absolute;
+  opacity: 0.8;
+  background-color: #202020;
+  left: auto;
+  width: 330px;
+  bottom: 0;
+  top: 70px;
+  right: 0;
+  height: 100%;
+}
+}
+@media screen and (min-width: 1891px) and (max-width: 3000px) {
+  .account-wall {
+    margin-top: auto;
+    margin-right: 10px;
+    padding-left: 200px;
+    padding: 20px;
+    margin-top: 200px;
+  }
+  .innerRightBlurred[data-v-d2e720c2][data-v-d2e720c2][data-v-d2e720c2] {
+  position: absolute;
+  opacity: 0.8;
+  background-color: #202020;
+  left: auto;
+  width: 330px;
+  bottom: 0;
+  top: 70px;
+  right: 0;
+  height: 100%;
+}
 }
 .login-title {
   color: #555;

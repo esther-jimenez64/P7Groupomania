@@ -43,6 +43,7 @@
             <button
               type="button"
               class="btn post-actions__upload attachments--btn"
+              tabindex="0"
             >
               <label for="upload-image" class="post-actions__label">
                 <i class="fa fa-upload" aria-hidden="true"></i>
@@ -55,6 +56,7 @@
               id="upload-image"
               accept="image/png, image/jpeg, image/jpg"
               @change="OneFileSelected"
+              @keyup.enter="OneFileSelected()"
             />
           </div>
           <div class="post-actions__widget">

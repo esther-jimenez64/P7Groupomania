@@ -488,6 +488,20 @@ export default {
     left: 160px;
   }
 }
+@media screen and (min-width: 2024px) and (max-width: 3000px) {
+  .bouge {
+    position: relative;
+    left: 160px;
+    top:15px;
+  }
+    h1 {
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    position: relative;
+    left: 80px;
+  }
+}
 @media screen and (min-width: 768px) and (max-width: 990px) {
   .bouge {
     position: relative;
@@ -531,7 +545,7 @@ export default {
       0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
   }
 }
-@media screen and (min-width: 576px) and (max-width: 2000px) {
+@media screen and (min-width: 576px) and (max-width: 3000px) {
   .button-62 {
     background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
     border: 0;
