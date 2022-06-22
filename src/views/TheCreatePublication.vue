@@ -153,26 +153,21 @@
                           <div class="card mb-2">
                             <div class="card-body p-2 p-sm-3">
                               <div class="media forum-item">
-                                <a
-                                  href="#"
-                                  data-toggle="collapse"
-                                  data-target=".forum-content"
-                                  ><img
+                            <img
                                     loading="lazy"
                                     alt="photo d'une figure humaine  représentant une photo de profils"
                                     src="https://bootdey.com/img/Content/avatar/avatar2.png"
                                     class="mr-3 rounded-circle"
                                     width="50"
-                                /></a>
+                                />
                                 <div class="media-body">
-                                  <h6>
-                                    <a
-                                      href="#"
+                                  <h6
+                              
                                       data-toggle="collapse"
                                       data-target=".forum-content"
                                       class="text-body"
-                                      >{{ this.token.username }}</a
-                                    ><!--récupèration de l'username du localStorage-->
+                                      >{{ this.token.username }}
+                                    <!--récupèration de l'username du localStorage-->
                                   </h6>
                                   <p class="text-secondary">
                                     {{ commentaire.content }}
@@ -271,7 +266,6 @@
                       <p class="limit">{{ publication.content }}</p>
                       <div class="ftr">
                         <div class="author">
-                          <a href="#">
                             <img
                               loading="lazy"
                               alt="photo d'une figure humaine  représentant une photo de profils"
@@ -302,7 +296,7 @@
                                 </button>
                               </form>
                             </div>
-                          </a>
+                         
                         </div>
                       </div>
                     </div>

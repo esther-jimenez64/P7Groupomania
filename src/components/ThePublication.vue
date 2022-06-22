@@ -13,7 +13,11 @@
       <div class="widget-post__header">
         <h2 class="widget-post__title" id="post-header-title">
           <i class="fa fa-pencil" aria-hidden="true"></i>
-          <input v-model="title" placeholder="Title" />
+          <input
+            v-model="title"
+            placeholder="Title"
+            id="input pour publier un titre"
+          />
           <!--V-model title pour la liaison d'entrée de formulaire à content bidirectionnelle-->
         </h2>
       </div>
@@ -56,7 +60,7 @@
               id="upload-image"
               accept="image/png, image/jpeg, image/jpg"
               @change="OneFileSelected"
-              @keyup.enter="OneFileSelected()"
+             
             />
           </div>
           <div class="post-actions__widget">
